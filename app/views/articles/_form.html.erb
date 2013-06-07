@@ -1,0 +1,13 @@
+<%= form_for @article, html: { class: "content-form" } do |f| %>
+	
+	<p>
+		<%= f.label :title %>
+		<%= f.text_field :title %>
+	</p>
+	
+	<p>
+		<%= f.label :body %>
+		<%= f.text_field :body %>
+	</p>
+	
+<% end %>

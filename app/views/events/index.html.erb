@@ -1,0 +1,19 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Local Events</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+
+    <section id="content" class="container clearfix">
+
+        <h1>Events in <%= Date.today.strftime("%B") %></h1>
+
+    	<%= render 'events/events' %>
+			
+			<%= render 'events/sidebar' %>
+
+    </section>
+
+</section>

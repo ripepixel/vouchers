@@ -1,0 +1,36 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Settings</h3>
+	<div class="one-third">
+		<%= render 'manager/settings_menu' %>
+	</div>
+	
+	<div class="two-thirds column-last">
+		<h4>Commission</h4>
+		<p><%= link_to "New Commission Rate", new_commission_path, class: 'button green' %></p>
+		<table class="gen-table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Page Size</th>
+					<th>Rate %</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @commissions.each do |comm| %>
+				<tr>
+					<td><%= comm.admin_user.to_s %></td>
+					<td><%= comm.advert_size.name %></td>
+					<td><%= comm.rate %>%</td>
+					<td><%= link_to 'Edit', edit_commission_path(comm) %> | <%= link_to 'Delete', comm, method: :delete, confirm: 'Are You Sure?' %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+
+</section>

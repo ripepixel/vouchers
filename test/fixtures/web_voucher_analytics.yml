@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  web_voucher_id: 1
+  viewed: 
+  printed: 
+  thumbs_up: 
+  thumbs_down: 
+  remote_ip: MyString
+
+two:
+  web_voucher_id: 1
+  viewed: 
+  printed: 
+  thumbs_up: 
+  thumbs_down: 
+  remote_ip: MyString

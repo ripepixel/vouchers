@@ -1,0 +1,63 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Create A Web Voucher</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+
+
+<%= render 'businesses/menu' %>
+  
+<!-- begin main content -->
+  <section id="main" class="three-fourths column-last">
+      <h2>Edit Your Web Voucher</h2>
+
+			<%= form_for @web_voucher, :html => { class: 'content-form' } do |f| %>
+			    <% if @web_voucher.errors.any? %>
+			       <div class="error_messages">
+			          <h4 class="error">Error processing form</h4>
+			             <ul>
+			                <% @web_voucher.errors.full_messages.each do |message| %>
+			                   <li class="error"><%= message %></li>
+			                <% end %>
+			       </div>
+			    <% end %>
+
+			    <p>
+	          <%= f.label :business_category_id, "Voucher Category" %>
+	          <%= f.collection_select :business_category_id, BusinessCategory.order('name ASC'), :id, :name %>
+	        </p>
+
+	        <p>
+	          <%= f.label :town, "Town" %>
+	          <%= f.text_field :town %>
+	        </p>
+
+	        <p>
+	          <%= f.label :title %>
+	          <%= f.text_field :title %>
+	        </p>
+
+	        <p>
+	          <%= f.label :details %>
+	          <%= f.text_area :details %>
+	        </p>
+
+	        <p>
+	          <%= f.label :terms, 'Terms & Conditions' %>
+	          <%= f.text_area :terms %>
+	        </p>
+	
+					<p>
+	          <%= f.label :weblink, "External Voucher Website" %>
+	          <%= f.text_field :weblink %>
+	        </p>
+
+	        <p><%= f.submit "Save", class: 'button' %> or <%= link_to "Cancel", business_dashboard_path %></p>
+	      <% end %>
+
+  </section>
+  <!-- end main content -->
+</section>
+<!-- end content -->

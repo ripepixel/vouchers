@@ -1,0 +1,17 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Add Web Voucher Credits</h3>
+	<p>Adding credits for <strong><%= @credits.business.business_name %></strong> who currently have <%= pluralize(@credits.credits, 'credit') %>.</p>
+	<%= form_tag manager_update_credits_path, :method => :post, class: "content-form" do %>
+	
+		<p><%= text_field_tag 'credits', nil, placeholder: 'Number of credits to add' %></p>
+		<%= hidden_field_tag 'bus_id', params[:id] %>
+		<p><%= submit_tag "Add", class: 'button' %></p>
+	
+	<% end %>
+	
+</section>
+
+
+</section>

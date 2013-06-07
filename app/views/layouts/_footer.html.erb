@@ -1,0 +1,70 @@
+<!-- begin footer -->
+	<footer id="footer">
+    	<!-- begin footer top -->
+        <div id="footer-top">
+        	<div class="container clearfix">
+                <div class="one-third">
+                    <div class="widget">
+                        <h3>Vouchers</h3>
+                        <p><%= link_to "Restaurant Vouchers", restaurant_vouchers_path %><br />
+                            <%= link_to "Health & Beauty Vouchers", health_and_beauty_vouchers_path %><br />
+                            <%= link_to "Bars, Pubs & Clubs Vouchers", bars_pubs_and_clubs_vouchers_path %><br />
+                            <%= link_to "Fast Food & Takeaway Vouchers", fast_food_and_takeaway_vouchers_path %><br />
+                            <%= link_to "Motoring Vouchers", motoring_vouchers_path %><br />
+                            <%= link_to "Fashion Vouchers", fashion_vouchers_path %>
+                        </p>
+                        
+						<h3>Latest Blog Articles</h3>
+                        <p>
+    						<% latest_blog_articles.each do |blog| %>
+                            	<%= link_to blog.title, article_path(blog) %><br />
+    						<% end %>
+                        </p>
+                    </div>
+                </div>
+                <div class="one-third">
+                    <div class="widget newsletter">
+                        <h3>Newsletter</h3>
+                        <p>Subscribe to our email newsletter and receive the latest vouchers, direct to your inbox.</p>
+						<%= form_tag newsletters_path, :method => :post, id: "newsletter-form", class: "content-form" do  %>
+							<%= email_field_tag 'email', nil, placeholder: "Enter your email address" %>
+                            <%= submit_tag "Subscribe", class: 'button' %>
+						<% end %>
+                        <h3>About Us</h3>
+                        <p>Red Hot Voucher Books provide the hottest vouchers for local businesses in your town.</p>
+                        
+                    </div>
+                </div>
+                <div class="one-third column-last">
+                    <div class="widget contact-info">
+                        <h3>Contact Us</h3>
+                        <div>
+                            <p class="phone"><strong>Phone:</strong> 0161 408 3334</p>
+                            <p class="email"><strong>Email:</strong> <%= link_to "Contact Us", contact_path %></p>
+                        </div>
+                        <h3>Socialise With Us</h3>
+                        <p><i class="icon-twitter"></i> <%= link_to "Twitter", "http://www.twitter.com/redhotvoucher", target: "_blank" %><br />
+                            <i class="icon-facebook"></i> <%= link_to "Facebook", "http://www.facebook.com/redhotvoucherbook", target: "_blank" %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end footer top -->
+
+        <!-- begin footer bottom -->
+        <div id="footer-bottom">
+        	<div class="container clearfix">
+                <div class="one-half">
+                    <p>Copyright &copy; 2013 DN Media. <%= link_to "Privacy", privacy_policy_path %> | <%= link_to "Terms", terms_path %></p>
+                </div>
+        
+                <div class="one-half column-last">
+                    <ul class="social-links">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end footer bottom -->
+	</footer>
+	<!-- end footer -->  

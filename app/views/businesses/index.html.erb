@@ -1,0 +1,32 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Businesses That Advertise With Red Hot Voucher Books</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+
+    	<h3>Businesses That Advertise With Red Hot Voucher Books</h3>
+    	<p>Below are a selection of the local businesses that have chosen to advertise with Red Hot Voucher Books.</p>
+
+		<% @businesses.each do |bus| %>
+
+			<div class="one-fourth">
+				<% if bus.image %>
+					<%= image_tag bus.image.to_s, width: "200" %><br />
+					<h4><%= bus.business_name %></h4>
+				<% else %>
+					<h4><%= bus.business_name %></h4>
+				<% end %>
+			</div>
+
+		<% end %>
+
+		<div class="clear"></div>
+
+    </section>
+
+   </section>

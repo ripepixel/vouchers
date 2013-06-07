@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset='UTF-8'>
+	
+	<title>Invoice</title>
+
+<style type="text/css">
+
+	* { margin: 0; padding: 0; }
+body { font: 14px/1.4 Georgia, serif; }
+#page-wrap { width: 600px; margin: 0 auto; }
+
+textarea { border: 0; font: 14px Georgia, Serif; overflow: hidden; resize: none; }
+table { border-collapse: collapse; }
+table td, table th { border: 1px solid black; padding: 5px; }
+
+#header { height: 15px; width: 100%; margin: 20px 0; background: #222; text-align: center; color: white; font: bold 15px Helvetica, Sans-Serif; text-decoration: uppercase; letter-spacing: 20px; padding: 8px 0px; }
+
+#address { width: 250px; height: 150px; float: left; }
+#customer { overflow: hidden; }
+.identity { float: left;}
+.logo { float: left; position: relative; margin-bottom: 25px; border: 1px solid #fff; max-width: 540px; max-height: 100px; overflow: hidden; }
+
+
+
+#customer-title { font-size: 16px; font-weight: bold; float: left; }
+
+#meta { margin-top: 1px; width: 300px; float: right; }
+#meta td { text-align: right;  }
+#meta td.meta-head { text-align: left; background: #eee; }
+#meta td textarea { width: 100%; height: 20px; text-align: right; }
+
+#items { clear: both; width: 100%; margin: 30px 0 0 0; border: 1px solid black; }
+#items th { background: #eee; }
+#items textarea { width: 80px; height: 50px; }
+#items tr.item-row td { border: 0; vertical-align: top; }
+#items td.description { width: 300px; }
+#items td.item-name { width: 175px; }
+#items td.description textarea, #items td.item-name textarea { width: 100%; }
+#items td.total-line { border-right: 0; text-align: right; }
+#items td.total-value { border-left: 0; padding: 10px; }
+#items td.total-value textarea { height: 20px; background: none; }
+#items td.balance { background: #eee; }
+#items td.blank { border: 0; }
+
+#terms { text-align: center; margin: 20px 0 0 0; }
+#terms h5 { text-transform: uppercase; font: 13px Helvetica, Sans-Serif; letter-spacing: 10px; border-bottom: 1px solid black; padding: 0 0 8px 0; margin: 0 0 8px 0; }
+#terms textarea { width: 100%; text-align: center;}
+
+textarea:hover, textarea:focus, #items td.total-value textarea:hover, #items td.total-value textarea:focus, .delete:hover { background-color:#EEFF88; }
+
+.delete-wpr { position: relative; }
+.delete { display: block; color: #000; text-decoration: none; position: absolute; background: #EEEEEE; font-weight: bold; padding: 0px 3px; border: 1px solid; top: -6px; left: -22px; font-family: Verdana; font-size: 12px; }
+</style>
+</head>
+
+<body onload="window.print();">
+
+	<div id="page-wrap">
+
+		<div id="header">INVOICE</div>
+		
+		<div class="logo">
+                <%= image_tag "web-logo.png" %>
+            </div>
+
+		<div class="identity">
+		
+            <p><strong>DN Media</strong><br />
+			6 Carlton Grove<br />
+			Horwich<br />
+			Phone: 0161 408 3334</p>
+		
+		</div>
+		
+		<div style="clear:both"></div>
+		
+		<div id="customer">
+
+            <div id="customer-title"><%= @advert.business.business_name %>
+            	<p><%= @advert.business.street %><br />
+					<%= @advert.business.town %><br />
+					<%= @advert.business.county %><br />
+					<%= @advert.business.postcode %>
+				</p></div>
+
+            <table id="meta">
+                <tr>
+                    <td class="meta-head">Invoice #</td>
+                    <td>000<%= @advert.id %></td>
+                </tr>
+                <tr>
+
+                    <td class="meta-head">Date</td>
+                    <td><%= l @advert.created_at %></td>
+                </tr>
+                <tr>
+                    <td class="meta-head">Amount Due</td>
+                    <td><div class="due"><%= number_to_currency(@advert.advert_cost) %></div></td>
+                </tr>
+
+            </table>
+		
+		</div>
+		
+		<table id="items">
+		
+		  <tr>
+		      <th width="80%">Description</th>
+		      <th>Price</th>
+		  </tr>
+		  
+		  <tr class="item-row">
+		      <td class="description"><%= @advert.advert_size.name %> Advertisement in the <%= @advert.booklet.name %> Edition of the Red Hot Voucher Book.</td>
+		      <td><span class="price"><%= number_to_currency(@advert.advert_cost) %></span></td>
+		  </tr>
+		  
+		  
+		  
+		  <tr>
+		      <td class="total-line"><strong>Subtotal</strong></td>
+		      <td class="total-value"><div id="subtotal"><%= number_to_currency(@advert.advert_cost) %></div></td>
+		  </tr>
+		  <tr>
+		      <td class="total-line"><strong>Total</strong></td>
+		      <td class="total-value"><div id="total"><strong><%= number_to_currency(@advert.advert_cost) %></strong></div></td>
+		  </tr>
+		
+		</table>
+		
+		<div id="terms">
+		  <h5>Terms</h5>
+		  <p>Payment required before <strong><%= l @advert.booklet.cut_off_date %></strong>. Please make cheques payable to DN Media.</p>
+			<p>Bank transfers accepted, DN Media, Natwest PLC, Account No: 21770824, Sort Code 60-24-77.</p>
+		</div>
+	
+	</div>
+	
+</body>
+
+</html>

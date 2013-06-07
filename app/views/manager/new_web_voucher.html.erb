@@ -1,0 +1,47 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">New Web Voucher</h3>
+	
+	<%= form_tag manager_create_web_voucher_path, :method => :post, class: "content-form" do %>
+	
+		<p>
+			<%= label_tag "business_account_id" %>
+			<%= select_tag "business_account_id", options_from_collection_for_select(BusinessAccount.all, "id", :name_of_business) %>
+		</p>
+
+		<p>
+			<%= label_tag "business_category_id" %>
+			<%= select_tag "business_category_id", options_from_collection_for_select(BusinessCategory.order('name ASC'), "id", "name") %>
+		</p>
+
+		<p>
+      		<%= label_tag "title", "Title" %>
+      		<%= text_field_tag "title",nil, required: 'required' %>
+    	</p>
+
+    	<p>
+      		<%= label_tag "details", "Details" %>
+      		<%= text_area_tag "details",nil, required: 'required' %>
+    	</p>
+
+    	<p>
+	      <%= label_tag "terms", "Terms & Conditions" %>
+	      <%= text_area_tag "terms",nil, required: 'required' %>
+	    </p>
+
+	    <p>
+      		<%= label_tag "town", "Town" %>
+      		<%= text_field_tag "town",nil, required: 'required' %>
+    	</p>
+
+
+
+		<p><%= submit_tag "Add", class: 'button' %></p>
+	
+	<% end %>
+	
+</section>
+
+
+</section>

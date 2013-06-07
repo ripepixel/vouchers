@@ -1,0 +1,28 @@
+<section id="main" class="blog-entry-list three-fourths">
+	<% if @events %>
+		<% @events.each do |event| %>
+		<article class="entry clearfix">
+			<div class="entry-date">
+				<div class="entry-day"><%= event.date_from.strftime("%e") %></div>
+				<div class="entry-month"><%= event.date_from.strftime("%b") %></div>
+			</div>
+			<div class="entry-body">
+				<h2 class="entry-title"><%= link_to event.title, event_path(event) %></h2>
+				<div class="entry-meta">
+					<span class="author"><%= event.business.business_name %></span>
+					<span class="category"><%= event.town %></span>
+					<!-- <span class="comments"></span> -->
+				</div>
+				<div class="entry-content">
+					<p><%= truncate(event.details, :omission => "#{link_to ' ...more', event_path(event)}", :length => 400).html_safe %></p>
+				</div>
+			</div>
+		</article>
+		<% end %>
+		
+		
+	<% else %>
+		<p>Sorry, there are no events yet. Please come back soon.</p>
+	<% end %>
+
+</section>

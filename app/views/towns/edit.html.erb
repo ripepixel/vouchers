@@ -1,0 +1,23 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Settings</h3>
+	<div class="one-third">
+		<%= render 'manager/settings_menu' %>
+	</div>
+	
+	<div class="two-thirds column-last">
+		<h4>Edit Town</h4>
+			<%= form_for @town, :html => { class: 'content-form' } do |f| %>
+				
+				  <p>
+				    <%= f.label :name %>
+				    <%= f.text_field 'name' %>
+				  </p>
+				  <p><%= f.submit "Save", class: 'button' %></p>
+				<% end %>
+	</div>
+</section>
+
+
+</section>

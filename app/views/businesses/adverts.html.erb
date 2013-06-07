@@ -1,0 +1,51 @@
+<!-- begin page title -->
+    <section id="page-title">
+        <div class="container clearfix">
+            <h1>Business Dashboard - Booklet Adverts</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+
+<%= render 'businesses/menu' %>
+  
+<!-- begin main content -->
+  <section id="main" class="three-fourths column-last">
+      <h2>Booklet Adverts</h2>
+      <p>Booklet adverts are advertisements / vouchers that are printed in our monthly voucher books.</p>
+
+      <p><%= link_to "New Booklet Voucher", business_new_book_advert_path, class: 'button blue' %></p>
+
+			<table class="gen-table">
+				<thead>
+					<tr>
+						<th>Booklet Name</th>
+						<th>Advert Size</th>
+						<th>Advert Cost</th>
+						<th>Paid?</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if @adverts.any? %>
+						<% @adverts.each do |ad| %>
+							<tr>
+								<% has_paid = ad.paid == true ? '<i class="icon-ok green"></i>' : '<i class="icon-remove red"></i>' %>
+								<% needs_to_pay = ad.paid == true ? "" : "| Pay" %>
+								<td><%= ad.booklet.name %></td>
+								<td><%= ad.advert_size.name %></td>
+								<td><%= number_to_currency(ad.advert_cost) %></td>
+								<td><%= has_paid.html_safe %></td>
+								<td><%= link_to "View", advert_path(ad) %> <%= needs_to_pay %> </td>
+							</tr>
+						<% end %>
+					<% else %>
+						<tr>
+							<td colspan="5">You have no adverts placed in our monthly booklet. If you would be interested in advertising, please <%= link_to "contact us", advert_enquiry_path %>.</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+  </section>
+  <!-- end main content -->
+</section>
+<!-- end content -->

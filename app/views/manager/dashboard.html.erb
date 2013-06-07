@@ -1,0 +1,48 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Stats</h3>
+	<div class="introbox">
+		<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business Accounts</th>
+				<th>Business Profiles</th>
+				<th>Web Vouchers</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><%= @businesses %></td>
+				<td><%= @profiles %></td>
+				<td><%= @web_vouchers %></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</section>
+
+<section>
+	<h3 class="mtop20">Business Reviews</h3>
+	<div class="introbox">
+		<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Active</th>
+				<th>Require Checking</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<% active_review = @reviews.select { |review| review.published == true } %>
+				<% to_check = @reviews.select { |review| review.active == false } %>
+				<td><%= active_review.size %></td>
+				<td><%= to_check.size %></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</section>
+
+
+</section>

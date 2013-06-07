@@ -1,0 +1,69 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<p>&nbsp;</p>
+	<p><%= link_to "New Booklet", new_booklet_path, class: "button" %></p>
+</section>
+
+<section>
+	<h3 class="mtop20">Current Booklets</h3>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Booklet Name</th>
+				<th>Town</th>
+				<th>Start Date</th>
+				<th>Cut Off Date</th>
+				<th>Pages</th>
+				<th>Adverts</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @current_booklets.each do |book| %>
+			<tr>
+				<td><%= link_to book.name, book %></td>
+				<td><%= book.town.name %></td>
+				<td><%= l book.start_date %></td>
+				<td><%= l book.cut_off_date %></td>
+				<td><%= number_with_precision(book.total_pages.to_f / 4, precision: 2) %></td>
+				<td><%= book.adverts.count %></td>
+				<td>Edit | Delete</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</section>
+
+<section>
+	<h3 class="mtop20">Past Booklets</h3>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Booklet Name</th>
+				<th>Town</th>
+				<th>Start Date</th>
+				<th>Cut Off Date</th>
+				<th>Pages</th>
+				<th>Adverts</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @past_booklets.each do |book| %>
+			<tr>
+				<td><%= link_to book.name, book %></td>
+				<td><%= book.town.name %></td>
+				<td><%= l book.start_date %></td>
+				<td><%= l book.cut_off_date %></td>
+				<td><%= number_with_precision(book.total_pages.to_f / 4, precision: 2) %></td>
+				<td><%= book.adverts.count %></td>
+				<td>Edit | Delete</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</section>
+
+
+</section>

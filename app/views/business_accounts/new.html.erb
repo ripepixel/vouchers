@@ -1,0 +1,52 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Register Your Business FREE</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+
+    <section id="content" class="container clearfix">
+        <section id="main">
+        	<div class="two-thirds">
+        		<h2>Register Your Business</h2>
+            	<%= form_for @business_account, :html => {class: 'content-form'} do |f| %>
+				  <% if @business_account.errors.any? %>
+				    <div class="error_messages">
+				      <h4 class="error">Error processing form</h4>
+				      <ul>
+				        <% @business_account.errors.full_messages.each do |message| %>
+				          <li class="error"><%= message %></li>
+				        <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
+
+				  <p>
+				    <%= f.label :email %>
+				    <%= f.text_field :email %>
+				  </p>
+				  <p>
+				    <%= f.label :password %>
+				    <%= f.password_field :password %>
+				  </p>
+				  <p>
+				    <%= f.label :password_confirmation, "Confirm Password" %>
+				    <%= f.password_field :password_confirmation %>
+				  </p>
+				  <p><%= f.submit "Sign Up", class: 'button' %></p>
+				<% end %>
+				<p>Already have an account? <%= link_to "Log In here", business_login_path %></p>
+            </div>
+        </section>
+        <section>    
+            <div class="one-third column-last">
+            	<%= render 'layouts/business_benefits' %>
+             </div>
+            <div class="clear"></div>
+        </section>
+        
+        
+        
+    </section>
+    <!-- end content -->  

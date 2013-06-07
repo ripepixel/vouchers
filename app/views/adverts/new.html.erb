@@ -1,0 +1,50 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Create A New Advert</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+				<%= form_for @advert, :html => { class: 'content-form' } do |f| %>
+				
+				<% if @advert.errors.any? %>
+          <div class="error_messages">
+            <h4 class="error">Error processing form</h4>
+            <ul>
+              <% @advert.errors.full_messages.each do |message| %>
+                <li class="error"><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+				<%= f.hidden_field :booklet_id, value: params[:booklet] %>
+				<p>
+          <%= f.label :business_id, "Business" %>
+          <%= f.collection_select :business_id, Business.order('business_name ASC'), :id, :business_name, prompt: true %>
+        </p>
+
+				<p>
+          <%= f.label :advert_size_id, "Advert Size" %>
+          <%= f.collection_select :advert_size_id, AdvertSize.order('name ASC'), :id, :name, prompt: true %>
+        </p>
+
+				<p>
+          <%= f.label :advert_cost, "Advert Cost (if different than standard cost - else leave blank)" %>
+          <%= f.text_field :advert_cost %>
+        </p>
+
+        <p>
+          <%= f.label :admin_user_id, "Sold By" %>
+          <%= f.collection_select :admin_user_id, AdminUser.order('fullname ASC'), :id, :fullname, prompt: true %>
+        </p>
+
+				<p><%= f.submit "Save", class: 'button' %> or <%= link_to "Cancel", manager_dashboard_path %></p>
+				
+				<% end %>
+		</section>
+		
+</section>

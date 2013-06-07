@@ -1,0 +1,61 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Edit Business Review</h3>
+
+	<%= form_for @review, :url => manager_update_review_path, :html => { class: 'content-form' } do |f| %>
+	                  <% if @review.errors.any? %>
+	                    <div class="error_messages">
+	                      <h4 class="error">Error processing form</h4>
+	                      <ul>
+	                        <% @review.errors.full_messages.each do |message| %>
+	                          <li class="error"><%= message %></li>
+	                        <% end %>
+	                      </ul>
+	                    </div>
+	                  <% end %>
+
+	                  <p>
+	                  	Business Name<br />
+	                  	<strong><%= @review.business.business_name %></strong>
+	                  </p>
+
+	                  <p>Rating: <%= rating_display(@review.rating).html_safe %></p>
+
+	                  <p>
+	                    <%= f.label :name %>
+	                    <%= f.text_field :name %>
+	                  </p>
+
+	                  <p>
+	                    <%= f.label :email %>
+	                    <%= f.text_field :email %>
+	                  </p>
+
+	                  
+	                  <p>
+	                  	<%= f.label :comments %>
+	                  	<%= f.text_area :comments %>
+	                  </p>
+	                  
+						<p>
+							<%= f.label :published %>
+							<%= f.check_box :published %>
+						</p>
+
+						<p>
+							<%= f.label :active %>
+							<%= f.check_box :active %>
+						</p>
+										
+						
+	
+						<%= f.hidden_field :id, value: @review.id %>
+										
+	                  <p><%= f.submit "Save", class: 'button' %> or <%= link_to "Cancel", manager_business_reviews_path %></p>
+	                <% end %>
+
+							  </section>
+							  <!-- end main content -->
+							</section>
+							<!-- end content -->

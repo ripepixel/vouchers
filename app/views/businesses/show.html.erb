@@ -1,0 +1,102 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1><%= "#{@business.business_name} in #{@business.town}" %></h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+    	
+        <section>
+        	<div class="two-thirds">
+        			<div>
+                        <h1><strong><%= @business.business_name %></strong></h1>
+                        <p><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@business.street}+#{@business.postcode}&zoom=15&size=600x200&markers=#{@business.street}+#{@business.postcode}&sensor=false" %></p>
+
+                        <p><strong>Rating:</strong> <%= rating_display(@rating.to_i).html_safe %> <%= pluralize(@reviews.count, "Review") %></p>
+                        <p><i class="<%= @business.business_category.icon %>"></i> <%= @business.business_category.name %></p>
+                        <p><%= @business.street if @business.street %><br />
+                            <%= @business.town if @business.town %><br />
+                            <%= @business.county if @business.county %><br />
+                            <%= @business.postcode if @business.postcode %>
+                        </p>
+                        <p>Tel: <%= @business.telephone if @business.telephone %></p>
+                        <p>Web: <%= link_to "#{@business.website}", @business.website, target: "_blank" if @business.website %></p>
+                        <% if !@business.about_us.blank? %>
+                            <h3>About Us</h3>
+                            <p><%= @business.about_us.gsub(/\n/, '<br/>').html_safe %></p>
+                        <% end %>
+                        <p></p>
+                    </div>
+				
+                <section id="comments">
+                    <a name="comments"></a>
+                    <h3><%= pluralize(@reviews.count, "Review") %> For <%= @business.business_name %></h3>
+                    <ol class="comment-list">
+                        <% if @reviews != nil %>
+                            <% @reviews.each do |com| %>
+                            <li class="comment">
+                                <div class="article-comment-wrap">
+                                    <div class="comment-details">
+                                        <div class="comment-author"><%= com.name %></div>
+                                        <div class="comment-meta"><%= com.created_at.strftime('%B %e %Y at %l:%M %p') %></div>
+                                        <div class="comment-meta">Rating: <%= rating_display(com.rating).html_safe %></div>
+                                        <div class="comment-content">
+                                            <p><%= com.comments %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <% end %>
+                        <% else %>
+                            <p>There are no reviews yet. You can add your own review using the form, below.</p>
+                        <% end %>
+                    </ol>
+                </section>
+
+                <section id="respond">
+                    <h2 class="mtop30">Add Your Review</h2>
+
+                    <%= form_tag business_process_review_path, class: 'content-form' do %>
+                        <%= hidden_field_tag :business_id, nil, value: @business.id %>
+                        <p><%= label_tag :name, "Name" %><%= text_field_tag :name, nil, required: true %> </p>
+                        <p><%= label_tag :email, "Email" %><%= email_field_tag :email, nil, required: true %> </p>
+                        <p><%= label_tag :rating, "Rating" %><%= select_tag :rating, "<option value=1>Poor</option><option value=2>Below Average</option><option value=3 selected=selected>Average</option><option value=4>Good</option><option value=5>Excellent</option>".html_safe %></p>
+                        <p><%= label_tag :comments, "Your Review" %> <%= text_area_tag :comments, nil, rows: 8, required: true, class: 'no-pad-top-ta' %></p>
+                        <p><%= submit_tag "Add Review", class: "button" %></p>
+
+
+                    <% end %>
+                    
+                    <div class="clear"></div>
+                </section>
+            </div>
+
+            <div class="one-third column-last">
+                <% if @business.image %>
+            	   <p><%= image_tag @business.image.to_s, width: "200" %></p>
+                <% end %>
+
+                <h2 class="mtop30"><%= @business.business_name %> Vouchers</h2>
+                <% if @vouchers %>
+                        <% @vouchers.each_with_index do |other, i| %>
+                            <div class="introbox-small">
+                                <h5><%= other.title %></h5>
+                                <p><i class="<%= other.business_category.icon %>"></i> <%= other.business_category.name %></p>
+                                <p class="expires">Expires: <%= l other.expiry_date %></p>
+                                <p><%= link_to "Get Voucher", web_voucher_path(other), class: "button red" %></p>
+                            </div>
+				            <% end %>
+                    <% end %>
+				
+
+
+            <div class="clear"></div>
+        </section>
+        
+        
+        
+    </section>
+    <!-- end content -->  

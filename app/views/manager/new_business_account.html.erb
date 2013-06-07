@@ -1,0 +1,17 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Add Business Account</h3>
+	
+	<%= form_tag manager_create_business_account_path, :method => :post, class: "content-form" do %>
+	
+		<p><%= text_field_tag 'email', nil, placeholder: 'Email' %></p>
+		<p>A password will be randomly generated and emailed to the email address.</p>
+		<p><%= submit_tag "Add", class: 'button' %></p>
+	
+	<% end %>
+	
+</section>
+
+
+</section>

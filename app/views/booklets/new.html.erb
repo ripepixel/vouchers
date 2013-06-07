@@ -1,0 +1,41 @@
+	<%= render 'manager/menu' %>
+
+	<section id="content" class="container clearfix">
+        <section id="main">
+        		<h2>New Booklet</h2>
+            	<%= form_for @booklet, :html => { class: 'content-form' } do |f| %>
+				<% if @booklet.errors.any? %>
+				    <div class="error_messages">
+				      <h4 class="error">Error processing form</h4>
+				      <ul>
+				        <% @booklet.errors.full_messages.each do |message| %>
+				          <li class="error"><%= message %></li>
+				        <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
+				  <p>
+				    <%= f.label :name %>
+				    <%= f.text_field :name %>
+				  </p>
+				<p>
+				    <%= f.label :town_id %>
+				    <%= f.collection_select :town_id, Town.all, :id, :name %>
+				  </p>
+				  <p>
+                    <%= f.label :start_date, "Start Date" %>
+                    <%= f.date_select :start_date, start_year: Time.now.year, end_year: Time.now.year + 1, discard_day: true %>
+                  </p>
+
+                  <p>
+                    <%= f.label :cut_off_date, "Cut Off Date" %>
+                    <%= f.date_select :cut_off_date, start_year: Time.now.year, end_year: Time.now.year + 1 %>
+                  </p>
+
+				  <p><%= submit_tag "Save", class: 'button' %> or <%= link_to "Cancel", manager_booklets_path %></p>
+				<% end %>
+        </section>
+	</section>
+
+
+</section>

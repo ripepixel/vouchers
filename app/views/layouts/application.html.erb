@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<!--[if IE 8]> <html class="ie8 no-js"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<!-- begin meta -->
+	<meta charset="utf-8">
+	<meta name="description" content="<%= meta_desc %>">
+	<meta name="keywords" content="<%= meta_key %>">
+	<meta name="author" content="DN Media">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- end meta -->
+    <link href="favicon.png" type="image/png" rel="shortcut icon">
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+  	<%= javascript_include_tag "application" %>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.1.js"></script>
+  	<%= csrf_meta_tags %>
+	
+    <script type="text/javascript"> <!-- drop-down menu -->
+        ddlevelsmenu.setup("nav", "topbar");
+    </script>
+	
+	<title><%= page_title %></title>
+
+  <script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "11520cef-4a06-41e9-a731-4fd5f32f221b", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+	
+</head>
+
+<body class="wide">
+<!-- begin container -->
+<div id="wrap">
+	<%= render 'layouts/header' %>
+	
+    <%= yield %>
+    
+    <%= render 'layouts/footer' %>
+</div>
+<!-- end container -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39916818-1']);
+  _gaq.push(['_setDomainName', 'redhotvoucherbook.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

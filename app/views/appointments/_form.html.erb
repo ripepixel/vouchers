@@ -1,0 +1,51 @@
+<%= form_for @appointment, :html => { class: "content-form" } do |f| %>
+	<% if @appointment.errors.any? %>
+	    <div class="error_messages">
+	      <h4 class="error">Error processing form</h4>
+	      <ul>
+	        <% @appointment.errors.full_messages.each do |message| %>
+	          <li class="error"><%= message %></li>
+	        <% end %>
+	      </ul>
+	    </div>
+	<% end %>
+		<p>
+		    <%= f.label :business_name %>
+		    <%= f.text_field :business_name %>
+		</p>
+
+		<p>
+		    <%= f.label :town_id, "Town" %>
+		    <%= f.collection_select :town_id, Town.all, :id, :name, {}, { style: 'width: 30%' } %>
+		</p>
+
+		<p>
+		    <%= f.label :telephone %>
+		    <%= f.text_field :telephone, class: 'small' %>
+		</p>
+
+		<p>
+		    <%= f.label :contact_name %>
+		    <%= f.text_field :contact_name, class: 'small' %>
+		</p>
+
+		<p>
+		    <%= f.label :appointment_time %>
+		    <%= f.datetime_select :appointment_time, { :start_year => Date.today.year, :minute_step => 15 }, style: 'width: 10%' %>
+		</p>
+
+		<p>
+		    <%= f.label :comments %>
+		    <%= f.text_area :comments %>
+		</p>
+
+		<% if !f.object.new_record? %>
+		<p>
+		    <%= f.label :advert_size_id, "Advert Size" %>
+		    <%= f.collection_select :advert_size_id, AdvertSize.all, :id, :name, { prompt: true }, { :style => 'width: 30%' } %>
+		</p>
+		<% end %>
+		
+		<p><%= f.submit "Save", class: 'button' %></p>
+	
+	<% end %>

@@ -1,0 +1,38 @@
+<%= render 'manager/menu' %>
+
+
+<section>
+	<h3 class="mtop20">Web Vouchers</h3>
+	<%= link_to "New Web Voucher", manager_new_web_voucher_path, class: "button" %>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business</th>
+				<th>Title</th>
+				<th>Expires</th>
+				<th>Featured</th>
+				<th>Status</th>
+				<th>Created</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @vouchers.each do |voucher| %>
+			<tr>
+				<td><%= voucher.business.business_name %></td>
+				<td><%= voucher.title %></td>
+				<td><%= l voucher.expiry_date %></td>
+				<td><%= voucher.featured? %></td>
+				<td><%= voucher.status %></td>
+				<td><%= l voucher.created_at %></td>	
+				<td><%= link_to "Edit", manager_edit_web_voucher_path(id: voucher.id) %> | <%= link_to "Expire", manager_expire_web_voucher_path(id: voucher.id), confirm: 'Are You Sure?' %> | <%= link_to 'Delete', web_voucher_path(id: voucher.id), method: :delete, confirm: 'Are You Sure?' %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<%= will_paginate @vouchers %>
+</section>
+
+
+</section>

@@ -1,0 +1,37 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Business Reviews</h3>
+	
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business Name</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Rating</th>
+				<th>Published</th>
+				<th>Active</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @reviews.each do |rev| %>
+			<tr>
+				<td><%= rev.business.business_name %></td>
+				<td><%= rev.name %></td>
+				<td><%= rev.email %></td>
+				<td><%= rev.rating %></td>
+				<% is_published = rev.published == true ? '<i class="icon-ok green"></i>' : '<i class="icon-remove red"></i>' %>
+				<% is_active = rev.active == true ? '<i class="icon-ok green"></i>' : '<i class="icon-remove red"></i>' %>
+				<td><%= is_published.html_safe %></td>
+				<td><%= is_active.html_safe %></td>
+				<td><%= link_to "Edit", manager_edit_review_path(id: rev) %> | Delete</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</section>
+
+
+</section>

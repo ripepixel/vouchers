@@ -1,0 +1,53 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Your Red Hot Voucher Invoice</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+    	<p><%= link_to print_invoice_path(id: @advert), target: "_blank", class: "button large" do %> <i class="icon-print white icon-large"></i> Print <% end %></p>
+		<h1>Invoice</h1>
+			<div class="one-third">
+				<h3><%= @advert.business.business_name %></h3>
+				<p><%= @advert.business.street %><br />
+					<%= @advert.business.town %><br />
+					<%= @advert.business.county %><br />
+					<%= @advert.business.postcode %>
+				</p>
+			</div>
+			<div class="one-third">
+				
+			</div>
+			<div class="one-third column-last">
+				
+			</div>
+			<div class="clear"></div>
+			<div>
+				<table class="gen-table">
+					<thead>
+						<tr>
+							<th>Description</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><%= @advert.advert_size.name %> Advertisement in the <%= @advert.booklet.name %> Edition of the Red Hot Vocher Book.</td>
+							<td><%= number_to_currency(@advert.advert_cost) %></td>
+						</tr>
+						<tr>
+							<td style="text-align: right;"><strong>Total:</strong></td>
+							<td><%= number_to_currency(@advert.advert_cost) %></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<p>Payment required before <strong><%= l @advert.booklet.cut_off_date %></strong>. Please make cheques payable to DN Media.</p>
+			<p>Bank transfers accepted, DN Media, Natwest PLC, Account No: 21770824, Sort Code 60-24-77.</p>
+		</section>
+	
+</section>

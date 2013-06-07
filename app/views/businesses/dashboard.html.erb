@@ -1,0 +1,89 @@
+<!-- begin page title -->
+    <section id="page-title">
+        <div class="container clearfix">
+            <h1>Business Dashboard</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    	<%= render 'businesses/menu' %>
+        
+		<!-- begin main content -->
+        <section id="main" class="three-fourths column-last">
+					<h2>Latest Web Vouchers</h2>
+					<% if @credits && @credits.credits > 0 %>
+						<p>You currently have <strong><%= pluralize(@credits.credits, 'credit') %></strong> remaining.</p>
+					<% end %>
+				<table class="gen-table">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Expires</th>
+							<th>Analytics<br />Views | Prints</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if @latest_web_vouchers.any? %>
+							<% @latest_web_vouchers.each do |ad| %>
+							<tr>
+								<td><%= ad.title %></td>
+								<% expired = ad.expiry_date < Date.today ? "Expired" : "#{pluralize((ad.expiry_date - Date.today).to_i, "Days")} left" %>
+								<td><strong><%= l ad.expiry_date %></strong> (<%= expired %>)</td>
+								<td><%= get_web_voucher_views(ad.id) %> | <%= get_web_voucher_prints(ad.id) %></td>
+								<!-- <td>-- Coming Soon --</td> -->
+								<% if has_expired?(ad.id) %>
+									<td>Expired</td>
+								<% else %>
+									<td><%= link_to "Edit", edit_web_voucher_path(ad.id) %> | <%= link_to "Expire", web_vouchers_expire_voucher_path(id: ad.id), confirm: 'Are you sure? This voucher will no longer be shown on the website!' %></td>
+								<% end %>
+							</tr>
+							<% end %>
+						<% else %>
+							<tr>
+								<td colspan='4'>You have not created any web vouchers yet. Would you like to <%= link_to "create one now?", new_web_voucher_path %>
+							</tr>	
+						<% end %>
+					</tbody>
+				</table>
+				<%= link_to "New Web Voucher", new_web_voucher_path, class: 'button blue' %> <%= link_to "View All Web Vouchers", business_web_vouchers_path, class: "button" %>
+	
+	
+           <h2 class="mtop30">Latest Booklet Adverts</h2>
+		      <table class="gen-table">
+						<thead>
+							<tr>
+								<th>Booklet Name</th>
+								<th>Advert Size</th>
+								<th>Advert Cost</th>
+								<th>Paid?</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% if @latest_adverts.any? %>
+								<% @latest_adverts.each do |lad| %>
+									<tr>
+										<% has_paid = lad.paid == true ? '<i class="icon-ok green"></i>' : '<i class="icon-remove red"></i>' %>
+										<% needs_to_pay = lad.paid == true ? "" : "| #{link_to 'Pay', advert_pay_advert_path(id: lad)}" %>
+										<td><%= lad.booklet.name %></td>
+										<td><%= lad.advert_size.name %></td>
+										<td><%= number_to_currency(lad.advert_cost) %></td>
+										<td><%= has_paid.html_safe %></td>
+										<td><%= link_to "View", advert_path(lad) %> <%= needs_to_pay.html_safe %> </td>
+									</tr>
+								<% end %>
+							<% else %>
+								<tr>
+									<td colspan="5">You have no adverts placed in our monthly booklet. If you would be interested in advertising, please <%= link_to 'Contact Us', advert_enquiry_path %>.</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+					<%= link_to "New Booklet Voucher", business_new_book_advert_path, class: 'button blue' %> <%= link_to "View All Booklet Adverts", business_adverts_path, class: "button" %>
+
+					
+            
+        </section>
+        <!-- end main content -->
+    </section>
+    <!-- end content --> 

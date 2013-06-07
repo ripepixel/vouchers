@@ -1,0 +1,78 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1><%= "#{@voucher.title} at #{@voucher.business_account.business.business_name}" %></h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+    	
+        <section>
+        	<div class="two-thirds">
+        			<div class="<%= "featured" if @voucher.featured %> introbox">
+                        <h1><strong><%= @voucher.title %></strong> at <%= @voucher.business_account.business.business_name %> in <%= @voucher.business_account.business.town %></h1>
+                        <h4>Details</h4>
+                        <p><%= @voucher.details %></p>
+                        <h4>Terms</h4>
+                        <p><%= @voucher.terms %></p>
+						<% expired = @voucher.expiry_date < Date.today ? "Expired" : "<strong>Valid From: #{l @voucher.start_date}</strong>- <strong>Expires: #{l @voucher.expiry_date}</strong>".html_safe %>
+                        <p class="expiry"><%= expired %></p>
+                        <% if @voucher.featured %>
+                            <%= image_tag 'ribbon-featured.png' %>
+                        <% end %>
+                    </div>
+										<p>
+										<% if !@voucher.weblink.blank? %>
+										<%= link_to "#{@voucher.weblink}", target: "_blank", class: "button large" do %> <i class="icon-link white icon-large"></i> View <% end %>
+										<% else %>
+                    <%= link_to print_voucher_path(id: @voucher), target: "_blank", class: "button large" do %> <i class="icon-print white icon-large"></i> Print <% end %>
+										<% end %>
+                        <span class='st_facebook_hcount' displayText='Facebook'></span>
+                        <span class='st_twitter_hcount' displayText='Tweet'></span>
+                        <span class='st_googleplus_hcount' displayText='Google +'></span>
+                        <span class='st_email_hcount' displayText='Email'></span></p>
+
+                <section>
+                    <h2 class="mtop30">More Vouchers From <%= @voucher.business_account.business.business_name %></h2>
+                    <% if @others %>
+                        <% @others.each_with_index do |other, i| %>
+                        <% divclass = (i == 2 ? 'one-third column-last' : 'one-third') %>
+                            <div class="<%= divclass %>">
+                                <div class="introbox-small">
+                                    <h5><%= other.title %></h5>
+                                    <p><i class="<%= other.business_category.icon %>"></i> <%= other.business_category.name %></p>
+                                    <p class="expires">Expires: <%= l other.expiry_date %></p>
+                                    <p><%= link_to "Get Voucher", web_voucher_path(other), class: "button red" %></p>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    <div class="clear"></div>
+                </section>
+            </div>
+
+            <div class="one-third column-last">
+            	<h2>Business Details</h2>
+                <% if @voucher.business_account.business.image %>
+            	   <p><%= image_tag @voucher.business_account.business.image.to_s, width: "200" %></p>
+                <% end %>
+				<p><strong><%= @voucher.business_account.business.business_name %></strong></p>
+				<p><%= @voucher.business_account.business.street if @voucher.business_account.business.street %><br />
+					<%= @voucher.business_account.business.town if @voucher.business_account.business.town %><br />
+					<%= @voucher.business_account.business.county if @voucher.business_account.business.county %><br />
+					<%= @voucher.business_account.business.postcode if @voucher.business_account.business.postcode %>
+				</p>
+				<p>Tel: <%= @voucher.business_account.business.telephone if @voucher.business_account.business.telephone %></p>
+				<p>Web: <%= link_to "#{@voucher.business_account.business.website}", @voucher.business_account.business.website, target: "_blank" if @voucher.business_account.business.website %></p>
+				<p><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@voucher.business_account.business.street}+#{@voucher.business_account.business.postcode}&zoom=15&size=300x300&markers=#{@voucher.business_account.business.street}+#{@voucher.business_account.business.postcode}&sensor=false" %></p>
+
+
+            <div class="clear"></div>
+        </section>
+        
+        
+        
+    </section>
+    <!-- end content -->  

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  advert_id: 1
+  business_account_id: 1
+  admin_user_id: 1
+  image: MyString
+  comment: MyText
+
+two:
+  advert_id: 1
+  business_account_id: 1
+  admin_user_id: 1
+  image: MyString
+  comment: MyText

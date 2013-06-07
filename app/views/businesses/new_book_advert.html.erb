@@ -1,0 +1,33 @@
+
+<!-- begin page title -->
+    <section id="page-title">
+        <div class="container clearfix">
+            <h1>Business Dashboard - New Booklet Advert</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+        <%= render 'businesses/menu' %>
+        
+        <!-- begin main content -->
+        <section id="main" class="three-fourths column-last">
+            <h2>Request Booklet Voucher Advertisement</h2>
+            <%= form_tag business_create_book_advert_path, :method => :post, class: "content-form"  do %>
+
+                <p>
+                    <%= label_tag "booklet_id", "Choose booklet edition" %>
+                    <%= select_tag "booklet_id", options_from_collection_for_select(Booklet.all, 'id', 'name') %>
+                  </p>
+
+                  <p>
+                    <%= label_tag "advert_size_id", "Choose advert size" %>
+                    <%= select_tag "advert_size_id", options_from_collection_for_select(AdvertSize.all, 'id', :name_with_price) %>
+                  </p>
+
+                  <p><%= submit_tag "Request", class: 'button' %></p>
+
+            <% end %>
+            
+        </section>
+        <!-- end main content -->
+    </section>
+    <!-- end content --> 

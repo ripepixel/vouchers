@@ -1,0 +1,49 @@
+<!-- begin page title -->
+    <section id="page-title">
+        <div class="container clearfix">
+            <h1>Business Dashboard - Web Vouchers</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    	<%= render 'businesses/menu' %>
+        
+		<!-- begin main content -->
+        <section id="main" class="three-fourths column-last">
+        	<h2>Web Vouchers</h2>
+            <p><%= link_to "Create Voucher", new_web_voucher_path, class: "button" %></p>
+						<% if @credits && @credits.credits > 0 %>
+							<p>You currently have <strong><%= pluralize(@credits.credits, 'credit') %></strong> remaining.</p>
+						<% end %>
+			<table class="gen-table">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Expires</th>
+						<th>Analytics<br />Views | Prints</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @adverts.each do |ad| %>
+					<tr>
+						<td><%= ad.title %></td>
+						<% expired = ad.expiry_date < Date.today ? "Expired" : "#{pluralize((ad.expiry_date - Date.today).to_i, "Days")} left" %>
+						<td><strong><%= l ad.expiry_date %></strong> (<%= expired %>)</td>
+						<!-- <td><%= get_web_voucher_views(ad.id) %> | <%= get_web_voucher_prints(ad.id) %></td> -->
+						<td>-- Coming Soon --</td>
+						<% if has_expired?(ad.id) %>
+							<td>Expired</td>
+						<% else %>
+							<td><%= link_to "Edit", edit_web_voucher_path(ad.id) %> | <%= link_to "Expire", web_vouchers_expire_voucher_path(id: ad.id), confirm: 'Are you sure? This voucher will no longer be shown on the website!' %></td>
+						<% end %>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<%= will_paginate @adverts %>
+            
+        </section>
+        <!-- end main content -->
+    </section>
+    <!-- end content --> 

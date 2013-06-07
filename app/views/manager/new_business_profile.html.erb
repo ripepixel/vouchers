@@ -1,0 +1,49 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Add Business Profile</h3>
+	
+	<%= form_tag manager_create_business_profile_path, :method => :post, class: "content-form" do %>
+	
+		<p>
+      <%= label_tag "business_name", "Business Name" %>
+      <%= text_field_tag "business_name", nil, required: 'required' %>
+    </p>
+    <p>
+      <%= label_tag "business_category_id", "Business Category" %>
+      <%= select_tag "business_category_id", options_from_collection_for_select(BusinessCategory.all, "id", "name") %>
+    </p>
+    <p>
+      <%= label_tag "street", "Street" %>
+      <%= text_field_tag "street",nil, required: 'required' %>
+    </p>
+    <p>
+      <%= label_tag "town", "Town" %>
+      <%= text_field_tag "town", nil, required: 'required' %>
+    </p>
+    <p>
+      <%= label_tag "county", "County" %>
+      <%= text_field_tag "county", nil, required: 'required' %>
+    </p>
+    <p>
+      <%= label_tag "postcode", "Poscode" %>
+      <%= text_field_tag "postcode", nil, required: 'required' %>
+    </p>
+    <p>
+      <%= label_tag "telephone", "Telephone" %>
+      <%= text_field_tag "telephone" %>
+    </p>
+    <p>
+      <%= label_tag "website", "Website" %>
+      <%= text_field_tag "website" %>
+			<%= hidden_field_tag "business_account_id", params[:id] %>
+    </p>
+    
+    <p><%= submit_tag "Save", class: 'button' %></p>
+	
+	<% end %>
+	
+</section>
+
+
+</section>

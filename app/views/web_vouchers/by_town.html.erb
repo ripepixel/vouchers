@@ -1,0 +1,75 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Vouchers in <%= @vouchers.first.town.name %></h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+    	
+        	<div class="two-thirds">
+
+                <% @featured.each do |feat| %>
+                    <div class="introbox">
+                        <h1><strong><%= link_to feat.title, web_voucher_path(feat) %></strong> at <%= feat.business.business_name %> in <%= feat.business_account.business.town %></h1>
+                        <div class="one-third">
+                            <p><%= image_tag feat.business.image.to_s, width: "150", class: "not-top" %></p>
+                        </div>
+
+                        <div class="one-third textalignleft">
+                            <i class="<%= feat.business_category.icon %>"></i> <%= link_to feat.business_category.name, web_vouchers_by_category_path(id: feat.business_category.id, business: feat.business_category.name) %><br />
+                            <%= feat.business.business_name %>, <%= feat.town %>
+                            <p>Expires: <%= l feat.expiry_date %></p>
+                        </div>
+                        <div class="one-third column-last">
+                            <%= link_to "Get Voucher", web_voucher_path(feat), class: "button large red" %>
+                        </div>
+                        <div class="clear"></div>
+                        <%= image_tag 'ribbon-featured.png' %>
+                    </div>
+                <% end %>
+
+                <% @vouchers.each do |voucher| %>
+                    <div class="introbox">
+                        <h1><strong><%= link_to voucher.title, web_voucher_path(voucher) %></strong> at <%= voucher.business.business_name %> in <%= voucher.business_account.business.town %></h1>
+                        <div class="one-third">
+                            <p><%= image_tag voucher.business.image.to_s, width: "150", class: "not-top" %></p>
+                        </div>
+
+                        <div class="one-third textalignleft">
+                            <i class="<%= voucher.business_category.icon %>"></i> <%= link_to voucher.business_category.name, web_vouchers_by_category_path(id: voucher.business_category.id, business: voucher.business_category.name) %><br />
+                            <%= voucher.business.business_name %>, <%= voucher.town %>
+                            <p>Expires: <%= l voucher.expiry_date %></p>
+                        </div>
+                        <div class="one-third column-last">
+                            <%= link_to "Get Voucher", web_voucher_path(voucher), class: "button large red" %>
+                        </div>
+                        <div class="clear"></div>
+                        <% if voucher.featured %>
+                            <%= image_tag 'ribbon-featured.png' %>
+                        <% end %>
+                    </div>
+                <% end %>
+
+
+            </div>
+        
+        <div class="cat-menu">    
+                <div class="one-third column-last">
+
+                    <%= render 'layouts/side_cat_menu' %>
+
+                    <%= render 'layouts/side_business_login' %>
+
+                    <%= render 'layouts/side_blog' %>
+                    
+                    <div class="clear"></div>
+                </div>
+            </div>
+        
+        
+        
+    </section>
+    <!-- end content -->  

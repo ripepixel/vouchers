@@ -1,0 +1,29 @@
+<%= form_for @commission, :html => { class: 'content-form' } do |f| %>
+				<% if @commission.errors.any? %>
+				    <div class="error_messages">
+				      <h4 class="error">Error processing form</h4>
+				      <ul>
+				        <% @commission.errors.full_messages.each do |message| %>
+				          <li class="error"><%= message %></li>
+				        <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
+				  
+				  <p>
+				    <%= f.label :admin_user_id, "Sales Rep" %>
+				    <%= f.collection_select :admin_user_id, AdminUser.all, :id, :fullname %>
+				  </p>
+
+				  <p>
+				    <%= f.label :advert_size_id %>
+				    <%= f.collection_select :advert_size_id, AdvertSize.all, :id, :name %>
+				  </p>
+
+				  <p>
+				    <%= f.label :rate %>
+				    <%= f.text_field :rate %>
+				  </p>
+
+				  <p><%= submit_tag "Save", class: 'button' %> or <%= link_to "Cancel", commissions_path %></p>
+				<% end %>

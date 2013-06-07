@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  booklet_id: 1
+  business_id: 1
+  advert_size_id: 1
+  advert_cost: 9.99
+  paid: false
+
+two:
+  booklet_id: 1
+  business_id: 1
+  advert_size_id: 1
+  advert_cost: 9.99
+  paid: false

@@ -1,0 +1,33 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Settings</h3>
+	<div class="one-third">
+		<%= render 'manager/settings_menu' %>
+	</div>
+	
+	<div class="two-thirds column-last">
+		<h4>Business Categories</h4>
+		<table class="gen-table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Icon</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @business_categories.each do |bc| %>
+				<tr>
+					<td><%= bc.name %></td>
+					<td><%= bc.icon %></td>
+					<td><%= link_to 'Edit', edit_business_category_path(bc) %> | <%= link_to 'Delete', bc, method: :delete, confirm: 'Are You Sure?' %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+
+</section>

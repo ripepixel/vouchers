@@ -1,0 +1,20 @@
+<% if current_business %>
+    <div class="introbox">
+        <h2><strong>Your Account</strong></h2>
+            <p><%= link_to "Your Dashboard", business_dashboard_path, class: 'button large green' %> </p>
+            <p><%= link_to "Logout", business_logout_path, class: 'button small red' %> </p>
+    </div>
+<% else %>
+
+<div class="introbox">
+    <h2><strong>Business Owners</strong></h2>
+            <p><%= link_to "Register Free", business_signup_path, class: 'button large green' %><br />
+            <%= link_to "Sign In", business_login_path, class: 'button large blue' %>
+            </p>
+        <p></p>
+        <p><%= link_to "List your business", business_signup_path %> today and get <%= FREE_CREDIT_AMOUNT %> web voucher listings for FREE.</p>
+        <p>If you would like to advertise in our Red Hot Voucher Booklet, please <%= link_to "contact us", contact_path %> or find out <%= link_to "more information here", advertising_path %>.</p>
+</div>
+
+<% end %>
+

@@ -1,0 +1,25 @@
+<p>&nbsp;</p>
+<% for voucher in @web_vouchers %>
+    <div class="<%= "featured" if voucher.featured %> introbox">
+        <h1><strong><%= link_to voucher.title, web_voucher_path(voucher) %></strong> at <%= voucher.business.business_name %> in <%= voucher.business_account.business.town %></h1>
+				<div class="one-third">
+					<p><%= image_tag voucher.business.image.to_s, width: "150", class: "not-top" %></p>
+				</div>
+
+				<div class="one-third textalignleft">
+					<i class="<%= voucher.business_category.icon %>"></i> <%= link_to voucher.business_category.name, web_vouchers_by_category_path(id: voucher.business_category.id, business: voucher.business_category.name) %><br />
+					<%= voucher.business.business_name %>, <%= voucher.town %>
+					<p>Expires: <%= l voucher.expiry_date %></p>
+				</div>
+				<div class="one-third column-last">
+					<%= link_to "Get Voucher", web_voucher_path(voucher), class: "button large red" %>
+				</div>
+				<div class="clear"></div>
+        
+        <% if voucher.featured %>
+            <%= image_tag 'ribbon-featured.png' %>
+        <% end %>
+    </div>
+<% end %>
+
+<%= will_paginate @web_vouchers %>

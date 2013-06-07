@@ -1,0 +1,103 @@
+<html>
+<head>
+
+<style type="text/css">
+
+body {
+	font-size: 12px;
+}
+.container {
+	width: 600px;
+	padding: 10px;
+	border: 1px solid #000;
+	overflow: hidden;
+}
+
+.logo {
+	width: 300px;
+	margin: 10px auto 30px auto;
+}
+
+.details {
+	width: 500px;
+	padding: 10px;
+	margin: 0 auto 30px auto;
+	border: 2px dashed #ccc;
+}
+
+.expiry {
+	font-size: 20px;
+	text-align: center;
+	color: #999;
+}
+
+.terms {
+	width: 500px;
+	margin: 0 auto 30px auto;
+}
+
+.footer {
+	width: 500px;
+	margin: 0 auto 30px auto;
+}
+
+.footer-bus-details {
+	width: 250px;
+	margin-right: 30px;
+	float: left;
+}
+
+.footer-logo {
+	float: left;
+	width: 200px;
+	text-align: right;
+}
+
+
+</style>
+</head>
+
+<body onload="window.print();">
+
+	<div class="container">
+
+		<div class="logo">
+			<%= image_tag @voucher.business_account.business.image.to_s, width: "280", alt: @voucher.business_account.business.business_name %>
+		</div>
+
+		<div class="details">
+			<h2><strong><%= @voucher.title %></strong> at <%= @voucher.business_account.business.business_name %> in <%= @voucher.business_account.business.town %></h2>
+        	<p><%= @voucher.details %></p>
+        	<% expired = @voucher.expiry_date < Date.today ? "Expired" : "<strong>Valid From: #{l @voucher.start_date}</strong>- <strong>Expires: #{l @voucher.expiry_date}</strong>".html_safe %>
+        	<p class="expiry"><%= expired %></p>
+		</div>
+
+		<div class="terms">
+			<p>
+        	<strong>Terms</strong><br />
+        	<%= @voucher.terms %></p>
+		</div>
+
+		<div class="footer">
+
+			<div class="footer-bus-details">
+				<p><strong><%= @voucher.business_account.business.business_name %></strong></p>
+        		<p><%= @voucher.business_account.business.street %><br />
+        		<%= @voucher.business_account.business.town %><br />
+        		<%= @voucher.business_account.business.postcode %><br />
+        		Tel: <%= @voucher.business_account.business.telephone %>
+        		</p>
+			</div>
+
+			<div class="footer-logo">
+				<p><%= image_tag "web-logo.png", height: "80" %></p>
+				<p>www.redhotvoucherbook.com</p>
+			</div>
+
+		</div>
+
+	</div>	
+
+</body>
+
+</html>

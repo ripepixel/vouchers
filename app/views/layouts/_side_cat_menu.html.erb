@@ -1,0 +1,13 @@
+<div class="accordion">
+    <div>
+        <span class="accordion-title">Vouchers By Category</span>
+        <div class="accordion-inner">
+            <ul>
+                <li><%= link_to "All Vouchers", root_url %></li>
+                <% @categories.each do |cat| %>
+                    <li><%= link_to cat.name, web_vouchers_by_category_path(id: cat, business: cat.name) %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+</div>

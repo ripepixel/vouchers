@@ -1,0 +1,91 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Your Red Hot Voucher</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+
+			<div class="two-thirds">
+				<h3>Your Voucher For The <%= @advert.booklet.town.name %> Book <%= @advert.booklet.month %> <%= @advert.booklet.year %></h3>
+				<section id='comments'>
+					<ol class='comment-list'>
+						<% if @comments.any? %>
+							<% @comments.each do |comment| %>
+								<li class='comment'>
+									<% accepted =  comment.accepted == true ? 'comment-accepted' : '' %>
+									<div class="comment-wrap <%= accepted %>">
+										<div class="comment-details">
+											<div class="comment-author">
+												<% name = comment.admin_user_id.nil? ? comment.business_account.business.business_name : "#{comment.admin_user.fullname} (Red Hot Voucher Book)" %>
+												<%= link_to name, '#' %>
+											</div>
+											<div class="comment-meta">
+												<%= l comment.created_at %>
+											</div>
+											<div class="comment-content">
+												<p><%= comment.comment %></p>
+												<%= link_to File.basename(comment.image.to_s), comment.image.to_s, target: '_blank' if comment.image %>
+												<% if !comment.image.blank? && !comment.admin_user_id.blank? %>
+													<% if comment.accepted == true %>
+														<p>Design Accepted</p>
+													<% else %>
+														<%= link_to "Accept Design", advert_comments_accept_design_path(id: comment.id), class: 'button' %>
+													<% end %>
+												<% end %>
+											</div>
+										</div>
+									</div>
+								</li>
+							<% end %>
+						<% else %>
+							<p>Your design will show up here soon. You will receive an email once it has been created.</p>
+						<% end %>
+					</ol>
+				</section>
+				<section id="respond">
+					<h3>Add A Comment</h3>
+					<p>Please add any changes to your design that you require, plus you can also upload any logos or images that you would like to be included in your design.</p>
+					
+					<%= form_for @advert_comment, :html => {id: "comment-form"} do |f| %>
+					
+						<p>
+					    <%= f.label :comment %>
+					    <%= f.text_area :comment %>
+					  </p>
+					
+						<p>
+							<%= f.label :image, 'File Upload' %>
+					    <%= f.file_field :image %>
+						</p>
+						<%= f.hidden_field :advert_id, value: params[:id] %>
+						<p class='form-submit'><%= f.submit "Add Comment", class: 'button' %></p>
+					
+					<% end %>
+					
+				</section>
+				
+			</div>
+			
+			<div class="one-third column-last">
+				<h4>Booklet Voucher Details</h4>
+				<p><strong>Town:</strong> <%= @advert.booklet.town.name %><br />
+				<strong>Date:</strong> <%= @advert.booklet.month %> <%= @advert.booklet.year %><br />
+				<strong>Size:</strong> <%= @advert.advert_size.name %><br />
+				<strong>Cost:</strong> <%= number_to_currency(@advert.advert_cost) %></p>
+				<% status = @advert.paid == true ? 'Paid' : 'Unpaid' %>
+				<p><strong>Status:</strong> <%= status %></p>
+				<% accepted = has_been_accepted(@advert.id) == true ? '<i class="icon-ok green"></i>' : '<i class="icon-remove red"></i>' %>
+				<p><strong>Accepted:</strong> <%= accepted.html_safe %></p>
+				<% if current_business %>
+					<p><%= link_to "Pay #{number_to_currency(@advert.advert_cost)}", advert_pay_advert_path(id:@advert.id), class: 'button green' if @advert.paid == false %></p>
+				<% end %>
+				<p><%= link_to "Invoice", advert_invoice_path(id: @advert.id) if @advert.paid == true %></p>
+			</div>
+
+		</section>
+			
+	</section>

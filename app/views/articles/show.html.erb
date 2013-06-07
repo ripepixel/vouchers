@@ -1,0 +1,84 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1><%= @article.title %> - Blog</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+
+    <section id="content" class="container clearfix">
+
+    	<section id="main" class="blog-entry-list three-fourths">
+	
+				<article class="entry clearfix">
+					<% if @article.image %>
+						<%= image_tag @article.image.to_s, width: "700" %>
+					<% end %>
+					<div class="entry-date">
+						<div class="entry-day"><%= @article.created_at.strftime("%e") %></div>
+						<div class="entry-month"><%= @article.created_at.strftime("%b") %></div>
+					</div>
+					<div class="entry-body">
+						<h2 class="entry-title"><%= @article.title %></h2>
+						<div class="entry-meta">
+							<span class="author"><%= @article.author_name %></span>
+							<span class="category"><%= link_to @article.article_category.name, articles_category_path(:name => @article.article_category.name) %></span>
+							<span class="comments"><%= link_to pluralize(@article.article_comments.have_been_reviewed.count, "Comment"), :anchor => "comments" %></span>
+						</div>
+						<div class="entry-content">
+							<p><%= @article.body.html_safe %></p>
+						</div>
+					</div>
+					
+					<nav class="page-nav prev-next">
+						<ul>
+							<li><%= link_to("Older Articles >", article_path(@article.previous_article)) if @article.previous_article %></li>
+							<li><%= link_to("< Latest Articles", article_path(@article.next_article)) if @article.next_article %></li>
+						</ul>
+						
+					</nav>
+					
+				</article>
+				
+				<section id="comments">
+					<a name="comments"></a>
+					<h3><%= pluralize(@comments.count, "Comment") %></h3>
+					<ol class="comment-list">
+						<% if @comments != nil %>
+							<% @comments.each do |com| %>
+							<li class="comment">
+								<div class="article-comment-wrap">
+									<div class="comment-details">
+										<div class="comment-author"><%= com.name %></div>
+										<div class="comment-meta"><%= com.created_at.strftime('%B %e %Y at %l:%M %p') %></div>
+										<div class="comment-content">
+											<p><%= com.comment %></p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<% end %>
+						<% else %>
+							<p>There are no comments yet. You can add your comment using the form, below.</p>
+						<% end %>
+					</ol>
+				</section>
+					
+				<section id="respond">
+					<h3 id="reply-title">Leave a comment</h3>
+					<%= form_for(:article_comment, :url => article_comments_path(:article_id => @article.id), :html => { class: 'content-form' }) do |f| %>
+						<%= f.hidden_field :article_id, value: @article.id %>
+						<p><%= f.label :name, "Name" %><%= f.text_field :name, required: true %> </p>
+						<p><%= f.label :email, "Email" %><%= f.email_field :email, required: true %> </p>
+						<p><%= f.label :comment, "Your Comment" %> <%= f.text_area :comment, rows: 8, required: true %></p>
+						<p><%= submit_tag "Add Comment", class: "button" %></p>
+					<% end %>
+				</section>
+	
+			</section>
+			
+			<%= render 'articles/sidebar' %>
+
+    </section>
+
+</section>

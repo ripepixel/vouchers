@@ -1,0 +1,58 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Appointments</h3>
+	<p><%= link_to "New Appointment", new_appointment_path, class: 'button' %> <%= link_to "All My Appointments", appointment_path(id: current_admin_user.id), class: 'button green' %></p>
+
+	<h2>Today's Appointments</h2>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business Name</th>
+				<th>Town</th>
+				<th>Telephone</th>
+				<th>Time</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @appointments.each do |app| %>
+			<tr>
+				<td><%= app.business_name %></td>
+				<td><%= app.town.name %></td>
+				<td><%= app.telephone %></td>
+				<td><%= app.appointment_time.strftime("%l:%M %p") %></td>
+				<td><%= link_to "Edit", edit_appointment_path(app) %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<h2>Future Appointments</h2>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business Name</th>
+				<th>Town</th>
+				<th>Telephone</th>
+				<th>Date</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @future.each do |app| %>
+			<tr>
+				<td><%= app.business_name %></td>
+				<td><%= app.town.name %></td>
+				<td><%= app.telephone %></td>
+				<td><%= app.appointment_time.strftime("%l:%M %p %a %e %b %Y") %></td>
+				<td>&nbsp;</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+</section>
+
+
+</section>

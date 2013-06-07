@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  email: MyString
+  subscribed: false
+  unsubscribe_date: 2013-04-06
+
+two:
+  email: MyString
+  subscribed: false
+  unsubscribe_date: 2013-04-06

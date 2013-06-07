@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  business_id: 1
+  title: MyString
+  details: MyText
+  image: MyString
+  date_from: 2013-06-06
+  date_to: 2013-06-06
+  prices: MyText
+  street: MyString
+  town: MyString
+  postcode: MyString
+  telephone: MyString
+  website: MyString
+  email: MyString
+  active: false
+  featured: false
+
+two:
+  business_id: 1
+  title: MyString
+  details: MyText
+  image: MyString
+  date_from: 2013-06-06
+  date_to: 2013-06-06
+  prices: MyText
+  street: MyString
+  town: MyString
+  postcode: MyString
+  telephone: MyString
+  website: MyString
+  email: MyString
+  active: false
+  featured: false

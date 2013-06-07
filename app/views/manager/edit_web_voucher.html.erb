@@ -1,0 +1,65 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Edit Web Voucher</h3>
+
+	<%= form_for @web_voucher, :url => manager_update_web_voucher_path, :html => { class: 'content-form' } do |f| %>
+	                  <% if @web_voucher.errors.any? %>
+	                    <div class="error_messages">
+	                      <h4 class="error">Error processing form</h4>
+	                      <ul>
+	                        <% @web_voucher.errors.full_messages.each do |message| %>
+	                          <li class="error"><%= message %></li>
+	                        <% end %>
+	                      </ul>
+	                    </div>
+	                  <% end %>
+
+
+	                  <p>
+	                    <%= f.label :business_category_id, "Voucher Category" %>
+	                    <%= f.collection_select :business_category_id, BusinessCategory.order('name ASC'), :id, :name %>
+	                  </p>
+
+	                  <p>
+	                    <%= f.label :title %>
+	                    <%= f.text_field :title %>
+	                  </p>
+
+	                  <p>
+	                    <%= f.label :details %>
+	                    <%= f.text_area :details %>
+	                  </p>
+
+	                  <p>
+	                    <%= f.label :terms, 'Terms & Conditions' %>
+	                    <%= f.text_area :terms %>
+	                  </p>
+	                  <p>
+	                    <%= f.label :start_date, "Start Date" %>
+	                    <%= f.date_select :start_date, start_year: Time.now.year, end_year: Time.now.year + 1 %>
+	                  </p>
+										<p>
+	                    <%= f.label :expiry_date, "Expiry Date" %>
+	                    <%= f.date_select :expiry_date, start_year: Time.now.year, end_year: Time.now.year + 1 %>
+	                  </p>
+	
+										<p>
+											<%= f.label :featured, "Feature this web voucher?" %>
+											<%= f.check_box :featured %>
+										</p>
+										
+										<p>
+	                    <%= f.label :town %>
+	                    <%= f.text_field :town %>
+	                  </p>
+	
+										<%= f.hidden_field :id, value: @web_voucher.id %>
+										
+	                  <p><%= f.submit "Save", class: 'button' %> or <%= link_to "Cancel", business_dashboard_path %></p>
+	                <% end %>
+
+							  </section>
+							  <!-- end main content -->
+							</section>
+							<!-- end content -->

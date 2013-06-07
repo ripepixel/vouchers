@@ -1,0 +1,16 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h2 class="mtop20">Commission Reports</h2>
+	<p>Select Booklet to view commission report</p>
+	<ul>
+		<% @booklets.each do |book| %>
+			<li><%= link_to "#{book.name} - #{l book.start_date}", manager_commission_by_booklet_path(booklet_id: book.id) %></li>
+		<% end %>
+	</ul>
+	
+	
+</section>
+
+
+</section>

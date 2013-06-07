@@ -1,0 +1,65 @@
+<%= form_for @business, :html => {:multipart => true, class: 'content-form'} do |f| %>
+                  <% if @business.errors.any? %>
+                    <div class="error_messages">
+                      <h4 class="error">Error processing form</h4>
+                      <ul>
+                        <% @business.errors.full_messages.each do |message| %>
+                          <li class="error"><%= message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                  <p>
+                    <%= f.label :business_name %>
+                    <%= f.text_field :business_name, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :business_category_id, "Business Category" %>
+                    <%= f.collection_select :business_category_id, BusinessCategory.all, :id, :name %>
+                  </p>
+                  <p>
+                    <%= f.label :street %>
+                    <%= f.text_field :street, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :town %>
+                    <%= f.text_field :town, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :county %>
+                    <%= f.text_field :county, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :postcode %>
+                    <%= f.text_field :postcode, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :telephone %>
+                    <%= f.text_field :telephone %>
+                  </p>
+                  <p>
+                    <%= f.label :website %>
+                    <%= f.text_field :website %>
+                  </p>
+                  <p>
+                    <%= f.label :email %>
+                    <%= f.text_field :email %>
+                  </p>
+                  <% unless @business.image.blank? %>
+                    <p>
+                      <%= f.label "Current Logo" %>
+                      <%= image_tag @business.image_url.to_s %>
+                    </p>
+                  <% end %>
+                  <p>
+                    <%= f.label :image, "Logo Upload" %>
+                    <%= f.file_field :image %>
+                  </p>
+
+                  <p>
+                    <%= f.label :about_us %>
+                    <%= f.text_area :about_us %>
+                  </p>
+                  <p><%= f.submit "Save", class: 'button' %></p>
+                <% end %>

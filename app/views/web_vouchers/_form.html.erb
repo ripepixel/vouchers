@@ -1,0 +1,48 @@
+<%= form_for @web_voucher, :html => { class: 'content-form' } do |f| %>
+                  <% if @web_voucher.errors.any? %>
+                    <div class="error_messages">
+                      <h4 class="error">Error processing form</h4>
+                      <ul>
+                        <% @web_voucher.errors.full_messages.each do |message| %>
+                          <li class="error"><%= message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+									
+                  <p>
+                    <%= f.label :business_category_id, "Voucher Category" %>
+                    <%= f.collection_select :business_category_id, BusinessCategory.order('name ASC'), :id, :name %>
+                  </p>
+
+                  <p>
+                    <%= f.label :title %>
+                    <%= f.text_field :title %>
+                  </p>
+
+                  <p>
+                    <%= f.label :details %>
+                    <%= f.text_area :details %>
+                  </p>
+
+                  <p>
+                    <%= f.label :terms, 'Terms & Conditions' %>
+                    <%= f.text_area :terms %>
+                  </p>
+
+									<p>If you would like to redirect users to an external voucher, ie, a voucher hosted on your website, please add the link to the website below.</p>
+									
+									<p>
+                    <%= f.label :weblink, 'External Voucher Website' %>
+                    <%= f.text_field :weblink %>
+                  </p>
+
+									<p>All Web Vouchers will last one month from the start date. Please make sure you choose the correct start date, as this can not be changed once saved.</p>
+                  <p>
+                    <%= f.label :start_date, "Start Date" %>
+                    <%= f.date_select :start_date, start_year: Time.now.year, end_year: Time.now.year + 1 %>
+                  </p>
+									<p>You will be taken to PayPal for payment processing, if you have no credits remaining.</p>
+                  <p><%= f.submit "Save", class: 'button' %> or <%= link_to "Cancel", business_dashboard_path %></p>
+                <% end %>

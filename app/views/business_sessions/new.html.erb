@@ -1,0 +1,38 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Log Into Your Business Account</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+
+    <section id="content" class="container clearfix">
+        <section id="main">
+        	<div class="two-thirds">
+        		<h2>Log In</h2>
+            	<%= form_tag business_sessions_path, class: 'content-form' do %>
+				  <p>
+				    <%= label_tag :email %>
+				    <%= text_field_tag :email, params[:email] %>
+				  </p>
+				  <p>
+				    <%= label_tag :password %>
+				    <%= password_field_tag :password %>
+				  </p>
+				  <p><%= submit_tag "Log In", class: 'button' %></p>
+				<% end %>
+				<p>Don't have an account yet? <%= link_to "Sign up here FREE", business_signup_path %></p>
+				<p><%= link_to "Forgotten Password?", business_sessions_reset_password_path %></p>
+            </div>
+        </section>
+        <section>    
+            <div class="one-third column-last">
+            	<%= render 'layouts/business_benefits' %>
+            </div> 
+            <div class="clear"></div>
+        </section>
+        
+
+        
+    </section>
+    <!-- end content -->  

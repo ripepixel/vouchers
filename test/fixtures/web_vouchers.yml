@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  business_account_id: 1
+  title: MyString
+  details: MyText
+  terms: MyText
+  start_date: 2013-03-18
+  expiry_date: 2013-03-18
+  advert_id: 1
+  featured: false
+
+two:
+  business_account_id: 1
+  title: MyString
+  details: MyText
+  terms: MyText
+  start_date: 2013-03-18
+  expiry_date: 2013-03-18
+  advert_id: 1
+  featured: false

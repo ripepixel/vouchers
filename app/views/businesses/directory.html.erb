@@ -1,0 +1,32 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+				<h1>Business Directory</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+
+        <%= render 'businesses/search_form' %>
+    	
+        <section>
+	
+        	<%= render 'businesses/businesses' %>
+
+            <div class="cat-menu">    
+                <div class="one-third column-last">
+
+                  <%= render 'layouts/side_business_login' %>
+
+                  <%= render 'layouts/side_blog' %>
+                    
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </section>
+        
+    </section>
+    <!-- end content -->  

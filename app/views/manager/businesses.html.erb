@@ -1,0 +1,37 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Businesses</h3>
+	<p><%= link_to "New Business Account", manager_new_business_account_path, class: 'button' %></p>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business Name</th>
+				<th>Email</th>
+				<th>Town</th>
+				<th>County</th>
+				<th>Telephone</th>
+				<th>Credits</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @businesses.each do |bus| %>
+			<tr>
+				<td><%= bus.business_name %></td>
+				<td><%= bus.business_account.email %></td>
+				<td><%= bus.town %></td>
+				<td><%= bus.county %></td>
+				<td><%= bus.telephone %></td>
+				<td><%= bus.web_voucher_credit.credits %> - <%= link_to 'Add', manager_add_credits_path(id: bus.business_account.id) %></td>
+				<td><%= link_to "Edit", manager_edit_business_profile_path(id: bus.id) %> | <%= link_to "Reset PW", business_sessions_send_new_password_path(email: bus.business_account.email), method: :post %> | Delete</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<%= will_paginate @businesses %>
+</section>
+
+
+</section>

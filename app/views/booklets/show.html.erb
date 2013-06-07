@@ -1,0 +1,61 @@
+	<%= render 'manager/menu' %>
+
+	<section id="content" class="container clearfix">
+		<p>&nbsp;</p>
+		<h2><%= @booklet.name %> Booklet</h2>
+
+		<div class="introbox">
+			<table class="gen-table">
+				<thead>
+					<tr>
+						<th>Expected Income</th>
+						<th>Current Income</th>
+						<th>Outstanding</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= number_to_currency(@booklet.expected_income) %></td>
+						<td><%= number_to_currency(@booklet.current_income) %></td>
+						<td><strong><%= number_to_currency(@booklet.expected_income - @booklet.current_income) %></strong></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		
+		
+		<p><%= link_to "New Advert", new_advert_path(booklet: @booklet.id), class: 'button' %></p>
+		
+		<table class="gen-table">
+			<thead>
+				<tr>
+					<th>Business Name</th>
+					<th>Advert Size</th>
+					<th>Advert Cost</th>
+					<th>Paid?</th>
+					<th>Accepted?</th>
+					<th>Sold By</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @booklet.adverts.each do |ad| %>
+				<tr>
+					<% has_paid = ad.paid == true ? '<i class="icon-ok green"></i>' : '<i class="icon-remove red"></i>' %>
+					<% is_accepted = has_been_accepted(ad.id) == true ? '<i class="icon-ok green"></i>' : '<i class="icon-remove red"></i>' %>
+					<td><%= link_to ad.business.business_name, advert_path(ad) %></td>
+					<td><%= ad.advert_size.name %></td>
+					<td><%= number_to_currency(ad.advert_cost) %></td>
+					<td><%= has_paid.html_safe %></td>
+					<td><%= is_accepted.html_safe %></td>
+					<td><%= ad.admin_user.to_s %></td>
+					<td><%= link_to "Set Paid |", manager_set_advert_paid_path(advert: ad.id, booklet: @booklet.id), confirm: 'Has this advert been paid for?' if ad.paid == false %> <%= link_to "Delete", advert_path(ad), :method => :delete, :confirm => "Are you sure?" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</section>
+
+
+</section>

@@ -1,0 +1,58 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Advertise In The Red Hot Voucher Book</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+
+    	<h3>Advertise In The Red Hot Voucher Book</h3>
+
+		<p>If you would like to advertise your business in the Red Hot Voucher Book, please use the form below and we will call you back shortly.</p>
+		<p>Alternatively, you can phone on <strong>0161 408 3334</strong>.</p>
+		<p>* Required fields</p>
+		
+		<%= form_tag(send_advert_enquiry_path, :method => 'post', class: "content-form") do %>
+		    <p>
+		      <%= label_tag :name, "Name *" %>
+		      <%= text_field_tag "name", @name, class: "input-text" %>
+		    </p>
+		
+				<p>
+		      <%= label_tag :business_name %>
+		      <%= text_field_tag "business_name", @business_name, class: "input-text" %>
+		    </p>
+		
+				<p>
+		      <%= label_tag :town %>
+		      <%= text_field_tag "town", @town, class: "input-text" %>
+		    </p>
+
+		    <p>
+		      <%= label_tag :email, "Email *" %>
+		      <%= text_field_tag "email", @email, class: "input-text" %>
+		    </p>
+		
+				<p>
+		      <%= label_tag :telephone %>
+		      <%= text_field_tag "telephone", @telephone, class: "input-text" %>
+		    </p>
+
+		    <p>
+		      <%= label_tag "Message", "Message *" %>
+		      <%= text_area_tag "message", @message, class: "input-text", rows: 15 %>
+		    </p>
+		
+		<%= hidden_field_tag :size, value: params[:size] %>
+
+		  <p>
+		    <%= submit_tag "Send", class: "button" %>
+		  </p>
+		<% end %>
+
+    </section>
+
+   </section>

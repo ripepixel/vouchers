@@ -1,0 +1,47 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1><%= @event.title %> - Events</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+
+    <section id="content" class="container clearfix">
+
+    	<section id="main" class="blog-entry-list three-fourths">
+	
+				<article class="entry clearfix">
+					<div class="entry-date">
+						<div class="entry-day"><%= @event.date_from.strftime("%e") %></div>
+						<div class="entry-month"><%= @event.date_from.strftime("%b") %></div>
+					</div>
+					<div class="entry-body">
+						<h2 class="entry-title"><%= @event.title %></h2>
+						<div class="entry-meta">
+							<span class="author"><%= @event.business.business_name %></span>
+						</div>
+						<div class="entry-content">
+							<h3>Details</h3>
+							<p><%= @event.details.gsub(/\n/, '<br />').html_safe %></p>
+							<h3>Dates</h3>
+							<p><strong>Starts:</strong> <%= l @event.date_from %> <br />
+								<strong>Ends:</strong> <%= l @event.date_to %>
+							</p>
+							<h3>Tickets / Admission Prices</h3>
+							<p><%= @event.prices.gsub(/\n/, '<br />').html_safe %></p>
+						</div>
+					</div>
+					
+					<div>
+						<%= link_to "All Events", events_path, class: 'button large green' %>
+					</div>
+					
+				</article>
+				
+			</section>
+			
+			<%= render 'events/sidebar' %>
+
+    </section>
+
+</section>

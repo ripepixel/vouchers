@@ -1,0 +1,50 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h2 class="mtop20">Commission By Booklet Report</h2>
+	<p><%= link_to "<< Back to reports", manager_commission_report_path, class: 'button green' %></p>
+	
+	<h3><%= @ads.first.booklet.name %></h3>
+	
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Adverts</th>
+				<th>Pages</th>
+				<th>Income</th>
+				<th>% age</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% total_income = @ads.map { |a| a['advert_cost'] }.reduce(0,:+) %>
+			<% @ads_user.sort.each do |user, ads| %>
+			<tr>
+				<% total_cost = ads.map { |a| a['advert_cost'] }.reduce(0, :+) %>
+				<td><strong><%= user %></strong></td>
+				<td><%= ads.count %></td>
+				<td><%= ((ads.to_a.sum { |item| item.advert_size.page_unit}) / 4.0) %></td>
+				<td><%= number_to_currency(total_cost) %></td>
+				<td><%= (total_cost / total_income)*100 %>%</td>
+			</tr>
+			<% end %>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><strong>Totals</strong></td>
+				<td><strong><%= @ads.count %></strong></td>
+				<td><strong><%= ((@ads.to_a.sum { |item| item.advert_size.page_unit}) / 4.0) %></strong></td>
+				<td><strong><%= number_to_currency( total_income )%></strong></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+
+</section>

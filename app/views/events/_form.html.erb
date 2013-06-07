@@ -1,0 +1,75 @@
+<%= form_for @event, :html => { class: 'content-form' } do |f| %>
+  <% if @event.errors.any? %>
+    <div class="error_messages">
+      <h4 class="error">Error processing form</h4>
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li class="error"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+									
+  <p>
+    <%= f.label :title, "Event Title" %>
+    <%= f.text_field :title %>
+  </p>
+  
+  <p>
+    <%= f.label :details %>
+    <%= f.text_area :details %>
+  </p>
+
+  <p>
+    <%= f.label :date_from, 'Start Date' %>
+    <%= f.date_select :date_from, { start_year: Time.now.year, end_year: Time.now.year + 1 }, style: 'width: 20%' %>
+  </p>
+
+  <p>
+    <%= f.label :date_to, 'End Date' %>
+    <%= f.date_select :date_to, { start_year: Time.now.year, end_year: Time.now.year + 1 }, style: 'width: 20%' %>
+  </p>
+									
+	<p>
+    <%= f.label :prices, 'Ticket / Entrance Pricing Details' %>
+    <%= f.text_area :prices %>
+  </p>
+
+  <h3>Location</h3>
+
+  <p>
+    <%= f.label :street %>
+    <%= f.text_field :street %>
+  </p>
+
+  <p>
+    <%= f.label :town %>
+    <%= f.text_field :town %>
+  </p>
+
+  <p>
+    <%= f.label :postcode %>
+    <%= f.text_field :postcode %>
+  </p>
+
+  <h3>Contact Details</h3>
+
+  <p>
+    <%= f.label :telephone %>
+    <%= f.text_field :telephone %>
+  </p>
+
+  <p>
+    <%= f.label :website %>
+    <%= f.text_field :website %>
+  </p>
+
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+
+  <p><%= f.submit "Save", class: 'button' %> or <%= link_to "Cancel", business_dashboard_path %></p>
+
+<% end %>

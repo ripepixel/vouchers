@@ -1,0 +1,26 @@
+
+
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+<!-- begin sidebar -->
+  <aside id="sidebar" class="one-fourth">
+      <div class="widget">
+        <p><strong>Welcome <%= current_business.business.business_name %></strong></p>
+
+          <h3>Menu</h3>	
+          <nav>
+              <ul class="menu">
+                <li><%= link_to "Dashboard", business_dashboard_path %></li>
+                <li><%= link_to "Web Vouchers", business_web_vouchers_path %></li>
+									<li><%= link_to "Booklet Adverts", business_adverts_path %></li>
+                  <li><%= link_to "Events", business_my_events_path %></li>
+                  <li>&nbsp;</li>
+                  <li><%= link_to "Profile", edit_business_path(current_business) %></li>
+									<li><%= link_to "Change Password", business_accounts_change_password_path %></li>
+                  <li>&nbsp;</li>
+                  <li><%= link_to "Log Out", business_logout_path %></li>
+              </ul>
+          </nav>
+      </div>
+  </aside>
+  <!-- end sidebar -->

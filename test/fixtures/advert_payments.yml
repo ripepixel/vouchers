@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  advert_id: 1
+  params: MyText
+  status: MyString
+  txn_id: MyString
+
+two:
+  advert_id: 1
+  params: MyText
+  status: MyString
+  txn_id: MyString

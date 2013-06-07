@@ -1,0 +1,35 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Settings</h3>
+	<div class="one-third">
+		<%= render 'manager/settings_menu' %>
+	</div>
+	
+	<div class="two-thirds column-last">
+		<h4>Advert Sizes</h4>
+		<table class="gen-table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Cost</th>
+					<th>Page Units</th>
+					<th>Active</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @advert_sizes.each do |as| %>
+				<tr>
+					<td><%= as.name %></td>
+					<td><%= number_to_currency(as.cost) %></td>
+					<td><%= as.page_unit %></td>
+					<td><%= link_to 'Edit', edit_advert_size_path(as) %> | <%= link_to 'Delete', as, method: :delete, confirm: 'Are You Sure?' %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+
+</section>

@@ -1,0 +1,37 @@
+<div class="two-thirds">
+                <% for business in @businesses %>
+                    <div class="introbox">
+                        
+                                <div class="one-third">
+                                    <p><%= image_tag business.image.to_s, width: "150", class: "not-top" %></p>
+                                    <%= link_to "View Details", business_path(business), class: "button large blue" %><br />
+                                    <% reviews = business.business_reviews.select { |review| review.published == true } %>
+                                    <% score = reviews.length > 0 ? rating_display(reviews.collect(&:rating).sum.to_f/reviews.length) : rating_display(0) %>
+                                    <strong>Rating:</strong> <%= score.html_safe %><br />
+                                    <%= pluralize(reviews.count, "review") %>
+                                </div>
+
+                                <div class="two-thirds column-last textalignleft">
+                                    <h1><strong><%= link_to business.business_name, business_path(business) %></strong></h1>
+                                    <p>
+                                        <i class="<%= business.business_category.icon %>"></i> <%= business.business_category.name %><br />
+                                        <%= business.business_name %><br />
+                                        <%= business.street %><br />
+                                        <%= business.town %><br />
+                                        <%= business.county %><br />
+                                        <%= business.postcode %><br />
+                                        <%= business.telephone %>
+                                    </p>
+                                    <% if !business.about_us.blank? %>
+                                        <p><%= truncate(business.about_us, :omission => "#{link_to ' ...more', business_path(business)}", :length => 100).html_safe %></p>
+                                    <% end %>
+                                </div>
+                                
+                                <div class="clear"></div>
+                        
+                    </div>
+                <% end %>
+
+                <%= will_paginate @businesses %>
+
+            </div> <!-- end two-thirds -->

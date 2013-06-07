@@ -1,0 +1,7 @@
+<section>
+            <%= form_tag business_search_path, class: "content-form", :method => 'get' do %>
+                <%= text_field_tag :what, nil, class: 'search-input-details', :placeholder => "I'm looking for (eg, beauty salon)", :autocomplete => "off" %>
+                <%= text_field_tag :where, nil, class: 'search-input-place', :placeholder => "in Town, County", :autocomplete => "off" %>
+                <%= button_tag "Search", id: 'search-submit' %>
+            <% end %>
+        </section>

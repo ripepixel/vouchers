@@ -1,0 +1,51 @@
+<!-- begin page title -->
+    <section id="page-title">
+    	<div class="container clearfix">
+            <h1>Contact Red Hot Voucher Book</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+    
+    <!-- begin content -->
+    <section id="content" class="container clearfix">
+
+    	<h3>Contact Red Hot Voucher Book</h3>
+
+		<p>If you have any questions, problems or suggestions, please use the form below to contact us and we will reply back as soon as we can.</p>
+		<p>Alternatively, you can phone on <strong>0161 408 3334</strong>.</p>
+		<p>* Required fields</p>
+		
+		<%= form_tag(send_contact_form_path, :method => 'post', class: "content-form") do %>
+		    <p>
+		      <%= label_tag :name, "Name *" %>
+		      <%= text_field_tag "name", @name, class: "input-text" %>
+		    </p>
+		
+				<p>
+		      <%= label_tag :business_name %>
+		      <%= text_field_tag "business_name", @business_name, class: "input-text" %>
+		    </p>
+
+		    <p>
+		      <%= label_tag :email, "Email *" %>
+		      <%= text_field_tag "email", @email, class: "input-text" %>
+		    </p>
+		
+				<p>
+		      <%= label_tag :telephone %>
+		      <%= text_field_tag "telephone", @telephone, class: "input-text" %>
+		    </p>
+
+		    <p>
+		      <%= label_tag "Message", "Message *" %>
+		      <%= text_area_tag "message", @message, class: "input-text", rows: 15 %>
+		    </p>
+
+		  <p>
+		    <%= submit_tag "Send", class: "button" %>
+		  </p>
+		<% end %>
+
+    </section>
+
+   </section>

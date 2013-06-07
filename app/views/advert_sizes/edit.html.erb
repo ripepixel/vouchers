@@ -1,0 +1,35 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Settings</h3>
+	<div class="one-third">
+		<%= render 'manager/settings_menu' %>
+	</div>
+	
+	<div class="two-thirds column-last">
+		<h4>Edit Advert Size</h4>
+			<%= form_for @advert_size, :html => { class: 'content-form' } do |f| %>
+				
+				  <p>
+				    <%= f.label :name %>
+				    <%= f.text_field :name %>
+				  </p>
+					<p>
+				    <%= f.label :cost %>
+				    <%= f.text_field :cost %>
+				  </p>
+					<p>
+				    <%= f.label :page_unit %>
+				    <%= f.text_field :page_unit %>
+				  </p>
+					<p>
+				    <%= f.label :active %>
+				    <%= f.check_box :active %>
+				  </p>
+				  <p><%= f.submit "Save", class: 'button' %></p>
+				<% end %>
+	</div>
+</section>
+
+
+</section>

@@ -1,0 +1,48 @@
+<div class="cat-menu">    
+            <div class="one-third column-last">
+
+                
+
+                <!-- <div class="introbox">
+                    <h2><strong><%= Date.today.strftime("%B") %> Booklet</strong></h2>
+                    <p>Have you got our latest voucher booklet?</p>
+                    <p>Download now!</p>
+                </div> -->
+
+                <div class="accordion">
+                    <div>
+                        <span class="accordion-title">Vouchers By Category</span>
+                        <div class="accordion-inner">
+                            <ul>
+                                <li><%= link_to "All Vouchers", root_url %></li>
+                                <% @categories.each do |cat| %>
+                                    <li><%= link_to cat.name, web_vouchers_by_category_path(id: cat, business: cat.name) %></li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+								
+				<div class="introbox">
+                    <h2><strong>Business Owners</strong></h2>
+                    <% if !current_business %>
+                        <p><%= link_to "Register Free", business_signup_path, class: 'button large green' %><br />
+                            <%= link_to "Sign In", business_login_path, class: 'button large blue' %>
+                        </p>
+                    <% end %>
+                    <p></p>
+                    <p><%= link_to "List your business", business_signup_path %> today and get <%= FREE_CREDIT_AMOUNT %> web voucher listings for FREE.</p>
+                    <p>If you would like to advertise in our Red Hot Voucher Booklet, please <%= link_to "contact us", contact_path %> or find out <%= link_to "more information here", advertising_path %>.</p>
+                </div>
+
+                <div class="introbox">
+                    <h2>Latest Blog Articles</h2>
+                    <% latest_blog_articles.each do |blog| %>
+                        <p><%= link_to blog.title, article_path(blog) %></p>
+                    <% end %>
+                </div>
+                
+                
+                <div class="clear"></div>
+            </div>
+</div>

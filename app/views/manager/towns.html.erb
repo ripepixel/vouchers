@@ -1,0 +1,31 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Settings</h3>
+	<div class="one-third">
+		<%= render 'manager/settings_menu' %>
+	</div>
+	
+	<div class="two-thirds column-last">
+		<h4>Towns</h4>
+		<table class="gen-table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @towns.each do |town| %>
+				<tr>
+					<td><%= town.name %></td>
+					<td><%= link_to 'Edit', edit_town_path(town) %> | <%= link_to 'Delete', town, method: :delete, confirm: 'Are You Sure?' %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+
+</section>

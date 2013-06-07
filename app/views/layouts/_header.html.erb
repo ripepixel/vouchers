@@ -1,0 +1,54 @@
+<!-- begin header -->
+    <header id="header" class="container clearfix">
+    	<!-- begin logo -->
+        <h1 id="logo"><%= link_to (image_tag "web-logo.png"), root_url %></h1>
+        <!-- end logo -->
+        
+        <!-- begin navigation wrapper -->
+        <div class="nav-wrap clearfix">
+
+            <!-- begin navigation -->
+            <nav id="nav">
+                <ul id="navlist" class="clearfix">
+                    <li><%= link_to "Home", root_url %></li>
+                    <li><%= link_to "Vouchers", web_vouchers_path %></li>
+                    <li <%= "class=current" if current_business %>><a href="#" rel="submenu1">Businesses</a>
+                        <ul id="submenu1" class="ddsubmenustyle">
+                            <li><%= link_to "Business Directory", business_directory_path %></li>
+                            <% if current_business %>
+                                <li><%= link_to "Dashboard", business_dashboard_path %></li>
+                                <li><%= link_to "Log Out", business_logout_path %></li>
+                            <% else %>
+                                <li><%= link_to "Sign Up", business_signup_path %></li>
+                                <li><%= link_to "Log In", business_login_path %></li>
+                            <% end %>
+                                <li><%= link_to "Advertise With Us", advertising_path %></li>
+                        </ul>
+                    </li>
+                    <!-- <li><%= link_to "Events", events_path %></li> -->
+                    <li><%= link_to "Blog", articles_path %></li> 
+                    
+                    <li><%= link_to "Contact", contact_path %></li>
+    								<% if current_admin_user %>
+    									<li><%= link_to "Admin", manager_dashboard_path %></li>
+    								<% end %>
+                </ul>
+            </nav>
+            <!-- end navigation -->
+        
+        </div>
+        <!-- end navigation wrapper -->
+    </header>
+    <!-- end header -->
+    <section class="messages">
+        <div class="container clearfix">
+            <% [:notice, :error, :alert].each do |level| %>
+            <% unless flash[level].blank? %>
+              <div class="notification-box notification-box-<%= flash_class(level) %>">
+                <%= content_tag :p, flash[level] %>
+                <a class="notification-close notification-close-<%= flash_class(level) %>" href="#">x</a>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+    </section>
