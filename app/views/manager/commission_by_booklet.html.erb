@@ -1,10 +1,9 @@
 <%= render 'manager/menu' %>
 
 <section>
-	<h2 class="mtop20">Commission By Booklet Report</h2>
+	<h2 class="mtop20">Commission By Booklet Report <%= link_to "Print", manager_commission_by_booklet_print_path(booklet_id: @ads.first.booklet.id), class: 'button red small', target: '_blank' %></h2>
 	<p><%= link_to "<< Back to reports", manager_commission_report_path, class: 'button green' %></p>
-	
-	<h3><%= @ads.first.booklet.name %></h3>
+	<h3><%= @ads.first.booklet.name %> Overview</h3>
 	
 	<table class="gen-table">
 		<thead>
@@ -44,6 +43,45 @@
 			</tr>
 		</tbody>
 	</table>
+
+	<h3 class="mtop30">Breakdown</h3>
+	<% @ads_user.sort.each do |user, ads| %>
+	<h4 class="mtop20"><%= user %></h4>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business</th>
+				<th>Advert Size</th>
+				<th>Ad Income</th>
+				<th>Commission</th>
+				<th>Fee</th>
+			</tr>
+		</thead>
+		<tbody>	
+			<% total_comm = 0 %>		
+			<% ads.each do |ad| %>
+				<tr>
+					<td><%= ad.business.business_name %></td>
+					<% comm = commission_rate(ad.admin_user_id, ad.advert_size_id).first.rate %> 
+					<% total_comm = total_comm + ( ad.advert_cost * (comm/100) ) %>
+					<td><%= ad.advert_size.name %></td>
+					<td><%= number_to_currency(ad.advert_cost) %></td>
+					<td><%= comm %>%</td>
+					<td><%= number_to_currency( ad.advert_cost * (comm/100) )%></td>
+				</tr>
+			<% end %>
+			
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td><strong>Total Commission</strong></td>
+				<td><strong><%= number_to_currency(total_comm) %></strong></td>
+			</tr>
+			
+		</tbody>
+	</table>
+	<% end %>
 </section>
 
 

@@ -68,6 +68,7 @@ Myapp::Application.routes.draw do
   get 'manager/reports', to: 'manager#reports'
   get 'manager/commission_report', to: 'manager#commission_report'
   get 'manager/commission_by_booklet', to: 'manager#commission_by_booklet'
+  get 'manager/commission_by_booklet_print', to: 'manager#commission_by_booklet_print'
   
   resources :towns
   resources :business_categories

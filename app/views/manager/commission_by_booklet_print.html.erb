@@ -1,0 +1,165 @@
+<html>
+
+<head>
+	<style type="text/css">
+		.gen-table {
+	width: 100%;	
+	margin-bottom: 20px;
+}
+
+.gen-table caption {
+	margin-bottom: 10px;
+}
+
+.gen-table th {
+	font-weight: bold;
+}
+
+.gen-table th, .gen-table td {
+	background-color: #fff;
+	padding: 5px;	
+	text-align: center;
+	border: 1px solid #dbdbdb;	
+	vertical-align: top;
+}
+
+.gen-table .empty-left-top {
+	background-color: transparent;
+	border-left-color: transparent;
+	border-top-color: transparent;
+}
+
+.gen-table .empty-left-bottom {
+	background-color: transparent;	
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+}
+
+.gen-table td.top-left {
+	text-align: left;
+	vertical-align: top;
+}
+
+.gen-table thead th {
+	font-size: 1.333em; /* 16px */
+	line-height: 1.375em; /* 22px/16px */
+}
+
+.gen-table thead th,
+.gen-table tfoot td {
+	background-color: #f2f2f2;	
+	border-color: #d9d9d9;
+}
+
+.gen-table tbody th,
+.gen-table tr.odd th, .gen-table tr.odd td {
+	background-color: #fafafa;
+}
+
+.gen-table tfoot td {
+	font-style: italic;
+	font-size: 0.916em; /* 11px */
+}
+
+.gen-table tfoot .button {
+	font-style: normal;
+	font-size: 1.09em; /* 12px/11px */
+	margin: 5px 0;
+}
+
+.gen-table tfoot + tbody tr.row-last th, 
+.gen-table tfoot + tbody tr.row-last td {
+	border-bottom-color: #d9d9d9;	
+}
+
+.gen-table tbody tr:hover th, .gen-table tbody tr:hover td {
+	background-color: #f3f7df;	
+}
+	</style>
+</head>
+
+<body onload="window.print();">
+	<h2 class="mtop20">Commission By Booklet Report - <%= l Date.today %></h2>
+	
+	<h3><%= @ads.first.booklet.name %> Overview</h3>
+	
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Adverts</th>
+				<th>Pages</th>
+				<th>Income</th>
+				<th>% age</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% total_income = @ads.map { |a| a['advert_cost'] }.reduce(0,:+) %>
+			<% @ads_user.sort.each do |user, ads| %>
+			<tr>
+				<% total_cost = ads.map { |a| a['advert_cost'] }.reduce(0, :+) %>
+				<td><strong><%= user %></strong></td>
+				<td><%= ads.count %></td>
+				<td><%= ((ads.to_a.sum { |item| item.advert_size.page_unit}) / 4.0) %></td>
+				<td><%= number_to_currency(total_cost) %></td>
+				<td><%= (total_cost / total_income)*100 %>%</td>
+			</tr>
+			<% end %>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><strong>Totals</strong></td>
+				<td><strong><%= @ads.count %></strong></td>
+				<td><strong><%= ((@ads.to_a.sum { |item| item.advert_size.page_unit}) / 4.0) %></strong></td>
+				<td><strong><%= number_to_currency( total_income )%></strong></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3 class="mtop30">Breakdown</h3>
+	<% @ads_user.sort.each do |user, ads| %>
+	<h4 class="mtop20"><%= user %></h4>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business</th>
+				<th>Advert Size</th>
+				<th>Ad Income</th>
+				<th>Commission</th>
+				<th>Fee</th>
+			</tr>
+		</thead>
+		<tbody>	
+			<% total_comm = 0 %>		
+			<% ads.each do |ad| %>
+				<tr>
+					<td><%= ad.business.business_name %></td>
+					<% comm = commission_rate(ad.admin_user_id, ad.advert_size_id).first.rate %> 
+					<% total_comm = total_comm + ( ad.advert_cost * (comm/100) ) %>
+					<td><%= ad.advert_size.name %></td>
+					<td><%= number_to_currency(ad.advert_cost) %></td>
+					<td><%= comm %>%</td>
+					<td><%= number_to_currency( ad.advert_cost * (comm/100) )%></td>
+				</tr>
+			<% end %>
+			
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td><strong>Total Commission</strong></td>
+				<td><strong><%= number_to_currency(total_comm) %></strong></td>
+			</tr>
+			
+		</tbody>
+	</table>
+	<% end %>
+
+</body>
+</html>

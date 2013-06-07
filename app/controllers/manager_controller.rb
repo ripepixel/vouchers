@@ -1,6 +1,7 @@
 class ManagerController < ApplicationController
   
 	before_filter :authenticate_admin_user!
+  helper_method :commission_rate
 
   def index
   	# not really needed - will redirect to active admin login page
@@ -208,6 +209,19 @@ class ManagerController < ApplicationController
   def commission_by_booklet
     @ads = Advert.where('booklet_id = ?', params[:booklet_id])
     @ads_user = @ads.group_by { |t| t.admin_user.fullname}
+    @commissions = Commission.all
+  end
+
+  def commission_by_booklet_print
+    @ads = Advert.where('booklet_id = ?', params[:booklet_id])
+    @ads_user = @ads.group_by { |t| t.admin_user.fullname}
+    @commissions = Commission.all
+    render :layout => false
+  end
+
+
+  def commission_rate(admin, advert)
+    Commission.where('admin_user_id = ? AND advert_size_id = ?', admin, advert)
   end
   
 end
