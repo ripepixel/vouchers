@@ -9,6 +9,14 @@
 	      </ul>
 	    </div>
 	<% end %>
+		<% if current_admin_user.auth_level == "full" %>
+			<p>
+			    <%= f.label :admin_user_id, "Rep Name" %>
+			    <%= f.collection_select :admin_user_id, AdminUser.all, :id, :fullname %>
+			</p>
+		<% else %>
+					<%= f.hidden_field :admin_user_id, value: current_admin_user.id %>
+		<% end %>
 		<p>
 		    <%= f.label :business_name %>
 		    <%= f.text_field :business_name %>

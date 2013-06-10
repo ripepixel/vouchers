@@ -8,6 +8,7 @@
 
 <section id="content" class="container clearfix">
 	<div class="manager-icons">
+		<h3 class='mbottom20'>Hey, <%= current_admin_user.fullname %>. <%= link_to "Logout", destroy_admin_user_session_path %></h3>
 		<div class="manager-icon-link">
 			<%= link_to manager_dashboard_path do %>
 				<i class="icon-cog icon-3x"></i> <br />Dashboard
@@ -64,10 +65,5 @@
 		<% end %>
 
 		
-		<div class="manager-icon-link">
-			<%= link_to destroy_admin_user_session_path do %>
-				<i class="icon-eject icon-3x"></i> <br />Log Out
-			<% end %>
-		</div>
 	</div>
 	<div class="clear"></div>
