@@ -29,7 +29,7 @@
 						<td><%= l event.date_from %></td>
 						<td><%= l event.date_to %></td>
 						<td><%= is_active.html_safe %></td>
-						<td><%= link_to "Edit", edit_event_path(event.id) %></td>
+						<td><%= link_to "Edit", edit_event_path(event) %> | <%= link_to 'Delete', event, method: :delete, confirm: 'Are You Sure?' %></td>
 					</tr>
 					<% end %>
 				</tbody>

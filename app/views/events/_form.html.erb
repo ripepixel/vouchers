@@ -70,6 +70,12 @@
     <%= f.text_field :email %>
   </p>
 
+  <h3>Image Upload</h3>
+  <p>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </p>  
+
   <p><%= f.submit "Save", class: 'button' %> or <%= link_to "Cancel", business_dashboard_path %></p>
 
 <% end %>

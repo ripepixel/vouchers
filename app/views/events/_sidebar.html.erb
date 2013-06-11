@@ -1,7 +1,16 @@
 <aside id="sidebar" class="one-fourth column-last">
 				<div class="widget">
-					<h3>Events Calendar</h3>
-					<ul class="menu">
-					</ul>
+					<h3><%= Date.today.next_month.strftime("%B") %> Events Calendar</h3>
+					<% @latest_events.each do |le| %>
+						<div class="entry clearfix">
+							<div class="entry-date">
+								<div class="entry-day"><%= le.date_from.strftime("%e") %></div>
+								<div class="entry-month"><%= le.date_from.strftime("%b") %></div>
+							</div>
+							<div class="entry-body">
+								<div class="entry-title"><%= link_to le.title, event_path(le) %></div>
+							</div>
+						</div>
+					<% end %>
 				</div>
 			</aside>

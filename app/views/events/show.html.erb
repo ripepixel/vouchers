@@ -11,6 +11,9 @@
     	<section id="main" class="blog-entry-list three-fourths">
 	
 				<article class="entry clearfix">
+					<% if !@event.image.to_s.blank? %>
+						<%= image_tag @event.image.to_s, width: "700" %>
+					<% end %>
 					<div class="entry-date">
 						<div class="entry-day"><%= @event.date_from.strftime("%e") %></div>
 						<div class="entry-month"><%= @event.date_from.strftime("%b") %></div>
@@ -23,17 +26,31 @@
 						<div class="entry-content">
 							<h3>Details</h3>
 							<p><%= @event.details.gsub(/\n/, '<br />').html_safe %></p>
+							
 							<h3>Dates</h3>
 							<p><strong>Starts:</strong> <%= l @event.date_from %> <br />
 								<strong>Ends:</strong> <%= l @event.date_to %>
 							</p>
+							
 							<h3>Tickets / Admission Prices</h3>
 							<p><%= @event.prices.gsub(/\n/, '<br />').html_safe %></p>
+
+							<h3>Contact Details</h3>
+							<p>Telephone: <%= @event.telephone %></p>
+							<p>Website: <%= link_to @event.website, @event.website, target: "_blank" %></p>
+							<p>Email: <%= @event.email %></p>
+
+							<h3>Event Location</h3>
+							<p><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@event.street}+#{@event.town}+#{@event.postcode}&zoom=15&size=600x200&markers=#{@event.street}+#{@event.town}+#{@event.postcode}&sensor=false" %></p>
+							<p><%= @event.title %><br />
+								<%= @event.street %><br />
+								<%= @event.town %><br />
+								<%= @event.postcode %></p>
 						</div>
 					</div>
 					
 					<div>
-						<%= link_to "All Events", events_path, class: 'button large green' %>
+						<%= link_to "<< All #{Date.today.strftime('%B')} Events", events_path, class: 'button large green' %>
 					</div>
 					
 				</article>

@@ -2,6 +2,11 @@
 	<% if @events %>
 		<% @events.each do |event| %>
 		<article class="entry clearfix">
+			<% if !event.image.to_s.blank? %>
+			<a class="entry-image link-overlay" title="<%= event.title %>" href="<%= event_path(event) %>">
+				<%= image_tag event.image_url.to_s, width: "700", height: "300" %>
+			</a>
+			<% end %>
 			<div class="entry-date">
 				<div class="entry-day"><%= event.date_from.strftime("%e") %></div>
 				<div class="entry-month"><%= event.date_from.strftime("%b") %></div>
