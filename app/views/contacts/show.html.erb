@@ -1,0 +1,28 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h2 class="mtop20"><%= @contact.business_name %></h2>
+	
+	<div class="one-half">
+		<h4>Contact Details</h4>
+		<p>Contact Name: <strong><%= @contact.contact_name %></strong><br />
+		Telephone: <strong><%= @contact.telephone %></strong><br />
+		Email: <strong><%= @contact.email %></strong></p>
+	</div>
+	
+	<div class="one-half column-last">
+		<% if @contact.business_id.blank? %>
+			<p><%= link_to "Create Business Listing", contacts_create_a_business_listing_path(contact_id: @contact.id), class: 'button small red' %></p>
+		<% end %>
+		<h4>Address</h4>
+		<p><%= @contact.street %><br />
+			<%= @contact.town %><br />
+			<%= @contact.county %><br />
+			<%= @contact.postcode %></p>
+	</div>
+	
+	
+</section>
+
+
+</section>

@@ -9,10 +9,14 @@ class ManagerController < ApplicationController
   end
 
   def dashboard
-    @businesses = BusinessAccount.count
-    @profiles = Business.count
-    @web_vouchers = WebVoucher.not_expired.has_paid.count
-    @reviews = BusinessReview.all
+    if current_admin_user.auth_level == "full"
+      @businesses = BusinessAccount.count
+      @profiles = Business.count
+      @web_vouchers = WebVoucher.not_expired.has_paid.count
+      @reviews = BusinessReview.all
+    else
+      redirect_to appointments_path
+    end
   end
   
   def booklets
@@ -92,14 +96,22 @@ class ManagerController < ApplicationController
     @business_account = BusinessAccount.new(email: params[:email], password: random_password, password_confirmation: random_password)
     if @business_account.save
       ContactMailer.new_business_account_password(params[:email], random_password).deliver
-      redirect_to manager_new_business_profile_path(id: @business_account.id), notice:"The business account has been created. Please add the business details."
+      if params[:contact_id]
+        redirect_to manager_new_business_profile_path(id: @business_account.id, contact_id: params[:contact_id]), notice: "Please check the contact details are correct"
+      else
+        redirect_to manager_new_business_profile_path(id: @business_account.id), notice:"The business account has been created. Please add the business details." and return
+      end
     else
       redirect_to manager_dashboard_path, alert:"There was a problem creating the business account"
     end
   end
   
   def new_business_profile
-    
+    if params[:contact_id]
+      @contact = Contact.find(params[:contact_id])
+    else
+      @contact = nil
+    end
   end
   
   def create_business_profile
@@ -108,6 +120,11 @@ class ManagerController < ApplicationController
                             county: params[:county], postcode: params[:postcode], telephone: params[:telephone], 
                             website: params[:website])
     if @profile.save
+      # add business_id to contact
+      if params[:contact_id]
+        contact = Contact.find(params[:contact_id])
+        contact.update_attributes(business_id: @profile.id)
+      end
       # add zero credits
       credits = WebVoucherCredit.create(business_account_id: @profile.business_account_id, credits: 0)
       redirect_to manager_dashboard_path, notice:"The business profile has been created"
@@ -222,6 +239,14 @@ class ManagerController < ApplicationController
 
   def commission_rate(admin, advert)
     Commission.where('admin_user_id = ? AND advert_size_id = ?', admin, advert)
+  end
+  
+  def create_contacts_from_existing_businesses
+    businesses = Business.all
+    businesses.each do |bus|
+      contact = Contact.new(business_name: bus.business_name, telephone: bus.telephone, street: bus.street, town: bus.town, county: bus.county, postcode: bus.postcode, website: bus.website, business_id: bus.id, do_not_contact: false, business_category_id: bus.business_category_id, email: bus.business_account.email)
+      contact.save
+    end
   end
   
 end

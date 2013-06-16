@@ -1,0 +1,78 @@
+<%= form_for @contact, :html => {class: 'content-form'} do |f| %>
+                  <% if @contact.errors.any? %>
+                    <div class="error_messages">
+                      <h4 class="error">Error processing form</h4>
+                      <ul>
+                        <% @contact.errors.full_messages.each do |message| %>
+                          <li class="error"><%= message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                  <p>
+                    <%= f.label :business_name %>
+                    <%= f.text_field :business_name, required: 'required' %>
+                  </p>
+									<p>
+                    <%= f.label :contact_name %>
+                    <%= f.text_field :contact_name %>
+                  </p>
+									<p>
+                    <%= f.label :telephone %>
+                    <%= f.text_field :telephone, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :business_category_id, "Business Category" %>
+                    <%= f.collection_select :business_category_id, BusinessCategory.all, :id, :name %>
+                  </p>
+                  <p>
+                    <%= f.label :street %>
+                    <%= f.text_field :street, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :town %>
+                    <%= f.text_field :town, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :county %>
+                    <%= f.text_field :county, required: 'required' %>
+                  </p>
+                  <p>
+                    <%= f.label :postcode %>
+                    <%= f.text_field :postcode, required: 'required' %>
+                  </p>
+									<p>
+                    <%= f.label :mobile %>
+                    <%= f.text_field :mobile %>
+                  </p>
+                  <p>
+                    <%= f.label :website %>
+                    <%= f.text_field :website %>
+                  </p>
+                  <p>
+                    <%= f.label :email %>
+                    <%= f.text_field :email %>
+                  </p>
+									<% if current_admin_user.auth_level == 'full' %>
+									<p>
+										<%= f.label :admin_user_id, "Assign Contact To" %>
+										<%= f.collection_select :admin_user_id, AdminUser.all, :id, :fullname %>
+									</p>
+									<% else %>
+										<% if f.object.new_record? %>
+											<%= f.hidden_field :admin_user_id, value: current_admin_user.id %>
+										<% end %>
+									<% end %>
+									
+									<% if f.object.new_record? %>
+										<%= f.hidden_field :created_by, value: current_admin_user.id %>
+                  <% end %>
+
+									<% if current_admin_user.auth_level == 'full' %>
+										<%= f.label :do_not_contact, "Do Not Contact This Customer" %>
+										<%= f.check_box :do_not_contact %>
+									<% end %>
+
+                  <p><%= f.submit "Save", class: 'button' %></p>
+                <% end %>

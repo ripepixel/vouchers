@@ -1,0 +1,39 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Contacts</h3>
+	<p><%= link_to "New Contact", new_contact_path, class: 'button' %></p>
+	<table class="gen-table">
+		<thead>
+			<tr>
+				<th>Business Name</th>
+				<th>Telephone</th>
+				<th>Contact Name</th>
+				<th>Town</th>
+				<th>Managed By</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @contacts.each do |con| %>
+			<tr>
+				<td><%= link_to con.business_name, contact_path(con) %></td>
+				<% if con.do_not_contact == true %>
+					<td>DO NOT CONTACT</td>
+				<% else %>
+					<td><%= con.telephone %></td>
+				<% end %>
+				<td><%= con.contact_name %></td>
+				<td><%= con.town %></td>
+				<td><%= con.admin_user.fullname if con.admin_user %></td>
+				<td><%= link_to "Edit", edit_contact_path(con) %> | <%= link_to 'Delete', con, method: :delete, confirm: 'Are You Sure?' %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<%= will_paginate @contacts %>
+</section>
+
+
+</section>

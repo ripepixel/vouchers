@@ -1,10 +1,7 @@
 Myapp::Application.routes.draw do
   
-  resources :commissions
-  resources :events
-  resources :appointments
+  
 
-  get "article_comments/create"
 
   get 'business_signup', to: 'business_accounts#new', as: 'business_signup'
   get 'business_login', to: 'business_sessions#new', as: 'business_login'
@@ -64,11 +61,20 @@ Myapp::Application.routes.draw do
   get 'manager/edit_review', to: 'manager#edit_review'
   put 'manager/update_review', to: 'manager#update_review', as: 'manager/update_review'
   
+  get 'contacts/create_a_business_listing', to: 'contacts#create_a_business_listing'
+  get 'contacts/totally_delete_contact', to: 'contacts#totally_delete_contact'
+  resources :contacts
+  resources :commissions
+  resources :events
+  resources :appointments
+  
   # Manager Reports
   get 'manager/reports', to: 'manager#reports'
   get 'manager/commission_report', to: 'manager#commission_report'
   get 'manager/commission_by_booklet', to: 'manager#commission_by_booklet'
   get 'manager/commission_by_booklet_print', to: 'manager#commission_by_booklet_print'
+  
+  get 'manager/create_contacts_from_existing_businesses', to: 'manager#create_contacts_from_existing_businesses'
   
   resources :towns
   resources :business_categories
@@ -100,7 +106,7 @@ Myapp::Application.routes.draw do
 
   # Static Pages
   get 'advertising', to: 'pages#advertising'
-  get 'contact', to: 'pages#contact'
+  get 'contact_us', to: 'pages#contact'
   post 'send_contact_form', to: 'pages#send_contact_form'
   get 'advert_enquiry', to: 'pages#advert_enquiry'
   post 'send_advert_enquiry', to: 'pages#send_advert_enquiry'

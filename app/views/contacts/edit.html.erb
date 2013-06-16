@@ -1,0 +1,15 @@
+<%= render 'manager/menu' %>
+
+<section>
+	<h3 class="mtop20">Edit Contact</h3>
+	
+	<%= render 'form' %>
+	
+	<% if current_admin_user.auth_level == "full" %>
+		<%= link_to "Completely Delete Contact", contacts_totally_delete_contact_path(contact_id: params[:id]), class: "button small red", confirm: "Are You Sure?" %>
+	<% end %>
+	
+</section>
+
+
+</section>

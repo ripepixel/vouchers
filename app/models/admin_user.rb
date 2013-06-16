@@ -13,6 +13,7 @@ class AdminUser < ActiveRecord::Base
   has_many :appointments
   has_many :adverts
   has_many :commissions
+  has_many :contacts
   
   def to_s
     fullname

@@ -18,9 +18,9 @@
 		<tbody>
 			<% @appointments.each do |app| %>
 			<tr>
-				<td><%= app.business_name %></td>
-				<td><%= app.town.name %></td>
-				<td><%= app.telephone %></td>
+				<td><%= app.contact.business_name %></td>
+				<td><%= app.contact.town %></td>
+				<td><%= app.contact.telephone %></td>
 				<td><%= app.appointment_time.strftime("%l:%M %p %a %e %b %Y") %></td>
 				<td><%= link_to "Edit", edit_appointment_path(app) %></td>
 			</tr>

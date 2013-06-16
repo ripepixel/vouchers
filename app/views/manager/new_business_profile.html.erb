@@ -7,7 +7,7 @@
 	
 		<p>
       <%= label_tag "business_name", "Business Name" %>
-      <%= text_field_tag "business_name", nil, required: 'required' %>
+      <%= text_field_tag "business_name", @contact.nil? ? nil:  @contact.business_name, required: 'required' %>
     </p>
     <p>
       <%= label_tag "business_category_id", "Business Category" %>
@@ -15,29 +15,33 @@
     </p>
     <p>
       <%= label_tag "street", "Street" %>
-      <%= text_field_tag "street",nil, required: 'required' %>
+      <%= text_field_tag "street",@contact.nil? ? nil:  @contact.street, required: 'required' %>
     </p>
     <p>
       <%= label_tag "town", "Town" %>
-      <%= text_field_tag "town", nil, required: 'required' %>
+      <%= text_field_tag "town", @contact.nil? ? nil:  @contact.town, required: 'required' %>
     </p>
     <p>
       <%= label_tag "county", "County" %>
-      <%= text_field_tag "county", nil, required: 'required' %>
+      <%= text_field_tag "county", @contact.nil? ? nil:  @contact.county, required: 'required' %>
     </p>
     <p>
-      <%= label_tag "postcode", "Poscode" %>
-      <%= text_field_tag "postcode", nil, required: 'required' %>
+      <%= label_tag "postcode", "Postcode" %>
+      <%= text_field_tag "postcode", @contact.nil? ? nil:  @contact.postcode, required: 'required' %>
     </p>
     <p>
       <%= label_tag "telephone", "Telephone" %>
-      <%= text_field_tag "telephone" %>
+      <%= text_field_tag "telephone", @contact.nil? ? nil:  @contact.telephone %>
     </p>
     <p>
       <%= label_tag "website", "Website" %>
-      <%= text_field_tag "website" %>
+      <%= text_field_tag "website", @contact.nil? ? nil:  @contact.website %>
 			<%= hidden_field_tag "business_account_id", params[:id] %>
     </p>
+
+		<% if @contact %>
+			<%= hidden_field_tag "contact_id", @contact.id %>
+		<% end %>
     
     <p><%= submit_tag "Save", class: 'button' %></p>
 	

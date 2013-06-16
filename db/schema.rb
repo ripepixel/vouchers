@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611111912) do
+ActiveRecord::Schema.define(:version => 20130614235923) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20130611111912) do
     t.integer  "advert_size_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "contact_id"
   end
 
   create_table "article_categories", :force => true do |t|
@@ -200,6 +201,36 @@ ActiveRecord::Schema.define(:version => 20130611111912) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.boolean  "active"
+  end
+
+  create_table "contact_messages", :force => true do |t|
+    t.integer  "contact_id"
+    t.integer  "admin_user_id"
+    t.text     "message"
+    t.boolean  "active"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string   "business_name"
+    t.string   "telephone"
+    t.string   "contact_name"
+    t.string   "street"
+    t.string   "town"
+    t.string   "county"
+    t.string   "postcode"
+    t.string   "email"
+    t.string   "mobile"
+    t.string   "website"
+    t.integer  "created_by"
+    t.integer  "managed_by"
+    t.integer  "business_id"
+    t.boolean  "do_not_contact"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "business_category_id"
+    t.integer  "admin_user_id"
   end
 
   create_table "events", :force => true do |t|

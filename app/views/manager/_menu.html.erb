@@ -9,17 +9,19 @@
 <section id="content" class="container clearfix">
 	<div class="manager-icons">
 		<h3 class='mbottom20'>Hey, <%= current_admin_user.fullname %>. <%= link_to "Logout", destroy_admin_user_session_path %></h3>
-		<div class="manager-icon-link">
-			<%= link_to manager_dashboard_path do %>
-				<i class="icon-cog icon-3x"></i> <br />Dashboard
-			<% end %>
-		</div>
+		
 
 		<% if current_admin_user.auth_level == 'basic' %>
 			
 			<div class="manager-icon-link">
 				<%= link_to appointments_path do %>
 					<i class="icon-calendar icon-3x"></i> <br />Appointments
+				<% end %>
+			</div>
+			
+			<div class="manager-icon-link">
+				<%= link_to contacts_path do %>
+					<i class="icon-avatar icon-3x"></i> <br />Contacts
 				<% end %>
 			</div>
 
@@ -32,8 +34,19 @@
 		<% elsif current_admin_user.auth_level == 'full' %>
 		
 			<div class="manager-icon-link">
+				<%= link_to manager_dashboard_path do %>
+					<i class="icon-cog icon-3x"></i> <br />Dashboard
+				<% end %>
+			</div>
+		
+			<div class="manager-icon-link">
 				<%= link_to appointments_path do %>
 					<i class="icon-calendar icon-3x"></i> <br />Appointments
+				<% end %>
+			</div>
+			<div class="manager-icon-link">
+				<%= link_to contacts_path do %>
+					<i class="icon-avatar icon-3x"></i> <br />Contacts
 				<% end %>
 			</div>
 			<div class="manager-icon-link">

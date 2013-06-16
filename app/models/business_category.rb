@@ -3,6 +3,7 @@ class BusinessCategory < ActiveRecord::Base
 
   has_many :web_vouchers
   has_many :businesses
+  has_many :contacts
   
   before_destroy :check_if_category_has_any_web_vouchers
   

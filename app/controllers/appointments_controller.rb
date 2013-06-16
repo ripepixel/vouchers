@@ -3,8 +3,8 @@ class AppointmentsController < ApplicationController
   
   def index
     if current_admin_user.auth_level == "full"
-      @appointments = Appointment.where('appointment_time between ? AND ?', Date.today.beginning_of_day, Date.today.end_of_day).order('appointment_time ASC')
-    	@future = Appointment.where('appointment_time > ? AND appointment_time < ?', Date.today+1.day, Date.today+5.days).order('appointment_time ASC').limit(10)
+      @appointments = Appointment.where('appointment_time between ? AND ?', Date.today.beginning_of_day, Date.today.end_of_day).group('admin_user_id').order('appointment_time ASC')
+    	@future = Appointment.where('appointment_time > ? AND appointment_time < ?', Date.today+1.day, Date.today+5.days).group('admin_user_id').order('appointment_time ASC').limit(10)
     else
       @appointments = Appointment.where('admin_user_id = ? AND appointment_time between ? AND ?', current_admin_user.id, Date.today.beginning_of_day, Date.today.end_of_day).order('appointment_time ASC')
     	@future = Appointment.where('admin_user_id = ? AND appointment_time > ? AND appointment_time < ?', current_admin_user.id, Date.today+1.day, Date.today+5.days).order('appointment_time ASC').limit(10)

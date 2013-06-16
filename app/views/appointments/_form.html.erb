@@ -18,23 +18,8 @@
 					<%= f.hidden_field :admin_user_id, value: current_admin_user.id %>
 		<% end %>
 		<p>
-		    <%= f.label :business_name %>
-		    <%= f.text_field :business_name %>
-		</p>
-
-		<p>
-		    <%= f.label :town_id, "Town" %>
-		    <%= f.collection_select :town_id, Town.all, :id, :name, {}, { style: 'width: 30%' } %>
-		</p>
-
-		<p>
-		    <%= f.label :telephone %>
-		    <%= f.text_field :telephone, class: 'small' %>
-		</p>
-
-		<p>
-		    <%= f.label :contact_name %>
-		    <%= f.text_field :contact_name, class: 'small' %>
+		    <%= f.label :contact_id, "Business" %>
+		    <%= f.collection_select :contact_id, Contact.all, :id, :business_name %>
 		</p>
 
 		<p>
