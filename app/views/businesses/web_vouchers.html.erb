@@ -29,8 +29,7 @@
 						<td><%= ad.title %></td>
 						<% expired = ad.expiry_date < Date.today ? "Expired" : "#{pluralize((ad.expiry_date - Date.today).to_i, "Days")} left" %>
 						<td><strong><%= l ad.expiry_date %></strong> (<%= expired %>)</td>
-						<!-- <td><%= get_web_voucher_views(ad.id) %> | <%= get_web_voucher_prints(ad.id) %></td> -->
-						<td>-- Coming Soon --</td>
+						<td><%= get_web_voucher_views(ad.id) %> | <%= get_web_voucher_prints(ad.id) %></td>
 						<% if has_expired?(ad.id) %>
 							<td>Expired</td>
 						<% else %>

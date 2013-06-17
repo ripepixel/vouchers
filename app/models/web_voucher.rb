@@ -25,7 +25,7 @@ class WebVoucher < ActiveRecord::Base
   	where("id NOT IN (?)", feat)
   }
   
-  scope :not_expired, lambda { where("start_date <= ? AND expiry_date >= ?", Date.today, Date.today) }
+  scope :not_expired, lambda { where("start_date <= ? AND expiry_date >= ?", Date.today.beginning_of_day, Date.today.end_of_day) }
   
   scope :has_paid, where(:status => 'Paid')
 
