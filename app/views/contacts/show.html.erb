@@ -7,7 +7,10 @@
 		<h4>Contact Details</h4>
 		<p>Contact Name: <strong><%= @contact.contact_name %></strong><br />
 		Telephone: <strong><%= @contact.telephone %></strong><br />
-		Email: <strong><%= @contact.email %></strong></p>
+		Email: <strong><%= @contact.email %></strong><br />
+		Mobile: <strong><%= @contact.mobile %></strong><br />
+		Website: <%= @contact.website %></p>
+		<p>Managed By: <strong><%= @contact.admin_user.fullname if @contact.admin_user %></strong></p>
 	</div>
 	
 	<div class="one-half column-last">
@@ -20,6 +23,27 @@
 			<%= @contact.county %><br />
 			<%= @contact.postcode %></p>
 	</div>
+
+		
+	<div class="contact-notes">
+		<h3>Notes</h3>
+		<% if @messages %>
+
+			<% @messages.each do |msg| %>
+				<p><strong><%= msg.message %></strong><br />
+					Added By: <%= msg.admin_user.fullname %> on <%= msg.created_at.strftime('%a %d %B %Y %H:%M') %></p>
+			<% end %>
+
+		<% end %>
+	</div>
+
+	<section id="respond">
+		<h3 id="reply-title">Add a note</h3>
+		<%= form_for(:contact_message, :url => contacts_add_contact_note_path(:contact_id => @contact.id), :html => { class: 'content-form' }) do |f| %>
+			<p><%= f.label :message, "Your Notes" %> <%= f.text_area :message, rows: 8, required: true %></p>
+			<p><%= submit_tag "Add Note", class: "button" %></p>
+		<% end %>
+	</section>
 	
 	
 </section>

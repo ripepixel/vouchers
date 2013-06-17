@@ -3,6 +3,8 @@ Myapp::Application.routes.draw do
   
 
 
+  get "contact_messages/new"
+
   get 'business_signup', to: 'business_accounts#new', as: 'business_signup'
   get 'business_login', to: 'business_sessions#new', as: 'business_login'
   get 'business_logout', to: 'business_sessions#destroy', as: 'business_logout'
@@ -63,6 +65,7 @@ Myapp::Application.routes.draw do
   
   get 'contacts/create_a_business_listing', to: 'contacts#create_a_business_listing'
   get 'contacts/totally_delete_contact', to: 'contacts#totally_delete_contact'
+  post 'contacts/add_contact_note', to: 'contacts#add_contact_note'
   resources :contacts
   resources :commissions
   resources :events

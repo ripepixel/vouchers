@@ -26,7 +26,7 @@
 				<td><%= con.contact_name %></td>
 				<td><%= con.town %></td>
 				<td><%= con.admin_user.fullname if con.admin_user %></td>
-				<td><%= link_to "Edit", edit_contact_path(con) %> | <%= link_to 'Delete', con, method: :delete, confirm: 'Are You Sure?' %></td>
+				<td><%= link_to "View", contact_path(con) %> | <%= link_to "Edit", edit_contact_path(con) %> | <%= link_to 'Delete', con, method: :delete, confirm: 'Are You Sure?' %></td>
 			</tr>
 			<% end %>
 		</tbody>

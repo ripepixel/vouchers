@@ -5,6 +5,7 @@ class Contact < ActiveRecord::Base
   belongs_to :admin_user
   has_one :business
   has_many :appointments
+  has_many :contact_messages
   
   validates :business_name, :telephone, :presence => true
 end

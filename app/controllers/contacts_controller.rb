@@ -39,6 +39,8 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
+    @messages = ContactMessage.where('contact_id = ?', @contact.id).order('created_at ASC')
+    @contact_message = ContactMessage.new
   end
   
   def destroy
@@ -62,5 +64,15 @@ class ContactsController < ApplicationController
     else
       redirect_to manager_create_business_account_path(email: contact.email, contact_id: contact) and return
     end 
+  end
+
+  def add_contact_note
+    contact = Contact.find(params[:contact_id])
+    note = ContactMessage.new(contact_id: params[:contact_id], admin_user_id: current_admin_user.id, message: params[:contact_message][:message], active: true)
+    if note.save
+      redirect_to contact_path(contact.id), notice: "The note has been added successfully"
+    else
+      redirect_to contact_path(contact.id), alert: "There was a problem adding the note"
+    end
   end
 end

@@ -14,6 +14,7 @@ class AdminUser < ActiveRecord::Base
   has_many :adverts
   has_many :commissions
   has_many :contacts
+  has_many :contact_messages
   
   def to_s
     fullname

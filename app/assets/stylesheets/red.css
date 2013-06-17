@@ -97,3 +97,11 @@ ins, mark {background-color: #BC2430;}
 .iconbox > a:hover {
 	border-color: #BC2430;	
 }
+
+.contact-notes {
+	width: 80%;
+	padding: 10px;
+	max-height: 400px;
+	overflow: auto;
+	border: 1px solid #ccc;
+}
