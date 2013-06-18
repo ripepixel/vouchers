@@ -3,6 +3,7 @@ Myapp::Application.routes.draw do
   
 
 
+  
   get "contact_messages/new"
 
   get 'business_signup', to: 'business_accounts#new', as: 'business_signup'
@@ -70,6 +71,7 @@ Myapp::Application.routes.draw do
   resources :commissions
   resources :events
   resources :appointments
+  resources :testimonials
   
   # Manager Reports
   get 'manager/reports', to: 'manager#reports'

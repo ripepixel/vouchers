@@ -1,0 +1,73 @@
+<section id="page-title">
+    	<div class="container clearfix">
+            <h1>Testimonials</h1>
+        </div>
+    </section>
+    <!-- end page title -->
+
+    <section id="content" class="container clearfix">
+
+    	<h2>Testimonials</h2>
+
+    	<p>Find out what our customers have to say about advertising in the Red Hot Voucher Book.</p>
+
+    	<% if @testimonials %>
+    		<% @testimonials.each do |test| %>
+
+    		<div class="one-third">
+
+    			<h3><%= test.business_name %></h3>
+    			<blockquote class="speech-bubble">
+    				<div class="quote-content">
+    					<p><%= test.message %></p>
+    					<span class="quote-arrow"></span>
+    				</div>
+    				<div class="quote-meta author-male">
+    					<strong><%= test.fullname %></strong><br />
+    					<span><%= test.town %></span>
+    				</div>
+    			</blockquote>
+
+    		</div>
+
+    		<% end %>
+
+    		<div class="clear"></div>
+
+    	<% end %>
+
+    </section>
+
+    <section id="content" class="container clearfix">
+
+    	<h3>Add Your Testimonial</h3>
+    	<p>Share your thoughts on Red Hot Voucher Book</p>
+
+    	<%= form_for @testimonial, :html => { class: 'content-form' } do |f| %>
+				
+				  <p>
+				    <%= f.label :fullname, "Your Name" %>
+				    <%= f.text_field :fullname %>
+				  </p>
+
+				  <p>
+				    <%= f.label :business_name, "Business Name" %>
+				    <%= f.text_field :business_name %>
+				  </p>
+
+				  <p>
+				    <%= f.label :town %>
+				    <%= f.text_field :town %>
+				  </p>
+
+				  <p>
+				    <%= f.label :message, "Your Testimonial" %>
+				    <%= f.text_area :message %>
+				  </p>
+
+				  <p><%= f.submit "Submit", class: 'button' %></p>
+				<% end %>
+
+    </section>
+
+</section>
