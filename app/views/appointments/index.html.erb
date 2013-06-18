@@ -24,7 +24,7 @@
 				<% if current_admin_user.auth_level == "full" %>
 				<td><%= app.admin_user.fullname %></td>
 				<% end %>
-				<td><%= app.contact.business_name %></td>
+				<td><%= app.contact.business_name if app.contact.business_name %></td>
 				<td><%= app.contact.town %></td>
 				<td><%= app.contact.telephone %></td>
 				<td><%= app.appointment_time.strftime("%l:%M %p") %></td>

@@ -1,6 +1,6 @@
 class TestimonialsController < ApplicationController
   def index
-  	@testimonials = Testimonial.where("active = ?", true).order("RANDOM()").limit(6)
+  	@testimonials = Testimonial.where("active = ?", true).order("RAND()").limit(6)
   	@testimonial = Testimonial.new
   end
 
