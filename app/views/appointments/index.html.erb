@@ -19,17 +19,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% @appointments.each do |app| %>
-			<tr>
-				<% if current_admin_user.auth_level == "full" %>
-				<td><%= app.admin_user.fullname %></td>
+			<% if @appointments %>
+				<% @appointments.each do |app| %>
+				<tr>
+					<% if current_admin_user.auth_level == "full" %>
+					<td><%= app.admin_user.fullname %></td>
+					<% end %>
+					<td><%= app.contact.business_name if app.contact.business_name %></td>
+					<td><%= app.contact.town %></td>
+					<td><%= app.contact.telephone %></td>
+					<td><%= app.appointment_time.strftime("%l:%M %p") %></td>
+					<td><%= link_to "Edit", edit_appointment_path(app) %></td>
+				</tr>
 				<% end %>
-				<td><%= app.contact.business_name if app.contact.business_name %></td>
-				<td><%= app.contact.town %></td>
-				<td><%= app.contact.telephone %></td>
-				<td><%= app.appointment_time.strftime("%l:%M %p") %></td>
-				<td><%= link_to "Edit", edit_appointment_path(app) %></td>
-			</tr>
 			<% end %>
 		</tbody>
 	</table>
@@ -49,17 +51,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% @future.each do |app| %>
-			<tr>
-				<% if current_admin_user.auth_level == "full" %>
-				<td><%= app.admin_user.fullname %></td>
+			<% if @future %>
+				<% @future.each do |app| %>
+				<tr>
+					<% if current_admin_user.auth_level == "full" %>
+					<td><%= app.admin_user.fullname %></td>
+					<% end %>
+					<td><%= app.contact.business_name %></td>
+					<td><%= app.contact.town %></td>
+					<td><%= app.contact.telephone %></td>
+					<td><%= app.appointment_time.strftime("%l:%M %p %a %e %b %Y") %></td>
+					<td><%= link_to "Edit", edit_appointment_path(app) %></td>
+				</tr>
 				<% end %>
-				<td><%= app.contact.business_name %></td>
-				<td><%= app.contact.town %></td>
-				<td><%= app.contact.telephone %></td>
-				<td><%= app.appointment_time.strftime("%l:%M %p %a %e %b %Y") %></td>
-				<td><%= link_to "Edit", edit_appointment_path(app) %></td>
-			</tr>
 			<% end %>
 		</tbody>
 	</table>
