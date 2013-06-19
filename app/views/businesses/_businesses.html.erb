@@ -3,7 +3,9 @@
                     <div class="introbox">
                         
                                 <div class="one-third">
-                                    <p><%= image_tag business.image.to_s, width: "150", class: "not-top" %></p>
+                                    <% if !business.image.to_s.blank? %>
+                                        <p><%= image_tag business.image.to_s, width: "150", class: "not-top" %></p>
+                                    <% end %>
                                     <%= link_to "View Details", business_path(business), class: "button large blue" %><br />
                                     <% reviews = business.business_reviews.select { |review| review.published == true } %>
                                     <% score = reviews.length > 0 ? rating_display(reviews.collect(&:rating).sum.to_f/reviews.length) : rating_display(0) %>

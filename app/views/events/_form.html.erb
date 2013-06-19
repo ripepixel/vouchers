@@ -71,6 +71,10 @@
   </p>
 
   <h3>Image Upload</h3>
+  <% if !@event.image.to_s.blank? %>
+    <p>Current Image</p>
+    <p><%= image_tag @event.image.to_s %></p>
+  <% end %>
   <p>
     <%= f.label :image %>
     <%= f.file_field :image %>

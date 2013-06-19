@@ -16,7 +16,11 @@
                     <div class="featured introbox">
                         <h1><strong><%= link_to feat.title, web_voucher_path(feat) %></strong> at <%= feat.business.business_name %> in <%= feat.business_account.business.town %></h1>
                         <div class="one-third">
-                            <p><%= image_tag feat.business.image.to_s, width: "150", class: "not-top" %></p>
+                            <% if !feat.business.image.to_s.blank? %>
+                                <p><%= image_tag feat.business.image.to_s, width: "150", class: "not-top" %></p>
+                            <% else %>
+                                <p style="width: 150px;"></p>
+                            <% end %>
                         </div>
 
                         <div class="one-third textalignleft">
@@ -36,7 +40,11 @@
                     <div class="introbox">
                         <h1><strong><%= link_to voucher.title, web_voucher_path(voucher) %></strong> at <%= voucher.business.business_name %> in <%= voucher.business_account.business.town %></h1>
                         <div class="one-third">
+                        <% if !voucher.business.image.to_s.blank? %>
                             <p><%= image_tag voucher.business.image.to_s, width: "150", class: "not-top" %></p>
+                        <% else %>
+                            <p style="width: 150px;"></p>
+                        <% end %>
                         </div>
 
                         <div class="one-third textalignleft">

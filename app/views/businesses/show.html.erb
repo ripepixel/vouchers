@@ -75,7 +75,7 @@
             </div>
 
             <div class="one-third column-last">
-                <% if @business.image %>
+                <% if !@business.image.to_s.blank? %>
             	   <p><%= image_tag @business.image.to_s, width: "200" %></p>
                 <% end %>
 

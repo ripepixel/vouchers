@@ -34,7 +34,7 @@ class BusinessesController < ApplicationController
       @meta_key = BUS_INDEX_META_KEY
 
         
-      @vouchers = WebVoucher.where('business_account_id = ? AND status = ?', @business.business_account_id, 'Paid').order('created_at DESC')
+      @vouchers = WebVoucher.where('business_account_id = ? AND status = ?', @business.business_account_id, 'Paid').not_expired.order('created_at DESC')
       @reviews = BusinessReview.where('business_id = ? AND published = ? AND active = ?', @business.id, true, true).order('created_at DESC')
       @rating = @reviews.collect(&:rating).sum.to_f/@reviews.length if @reviews.length > 0  
     

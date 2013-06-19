@@ -19,7 +19,7 @@ before_filter :authenticate_admin_user!, only: [:destroy]
     @meta_desc = @voucher.details
     @meta_key = WV_SHOW_META_KEY
 
-    @others = WebVoucher.where("business_account_id = ? AND id != ? AND status = ?", @voucher.business_account_id, @voucher.id, 'Paid').limit(3)
+    @others = WebVoucher.where("business_account_id = ? AND id != ? AND status = ?", @voucher.business_account_id, @voucher.id, 'Paid').not_expired.limit(3)
     WebVoucherAnalytics.create(web_voucher_id: @voucher.id, viewed: true, remote_ip: request.remote_ip)
   end
 
