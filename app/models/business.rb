@@ -1,5 +1,5 @@
 class Business < ActiveRecord::Base
-  attr_accessible :business_account_id, :business_category_id, :business_name, :county, :email, :logo, :postcode, :street, :telephone, :town, :website, :image, :about_us, :contact_id
+  attr_accessible :business_account_id, :business_category_id, :business_name, :county, :email, :logo, :postcode, :street, :telephone, :town, :website, :image, :about_us
 
   before_validation :smart_add_url_protocol
 
@@ -7,7 +7,7 @@ class Business < ActiveRecord::Base
 
   belongs_to :business_account
   belongs_to :business_category
-  belongs_to :contact
+  #belongs_to :contact
   has_one :web_voucher_credit, :through => :business_account
   has_many :adverts
   has_many :business_reviews

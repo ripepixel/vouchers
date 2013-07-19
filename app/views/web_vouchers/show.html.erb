@@ -55,7 +55,7 @@
 
             <div class="one-third column-last">
             	<h2>Business Details</h2>
-                <% if @voucher.business_account.business.image %>
+                <% if !@voucher.business_account.business.image.blank? %>
             	   <p><%= image_tag @voucher.business_account.business.image.to_s, width: "200" %></p>
                 <% end %>
 				<p><strong><%= @voucher.business_account.business.business_name %></strong></p>
