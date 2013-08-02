@@ -248,5 +248,11 @@ class ManagerController < ApplicationController
       contact.save
     end
   end
+
+  def sign_in_as_business
+    business_account = BusinessAccount.find_by_id(params[:id])
+    session[:business_id] = business_account.id
+    redirect_to business_dashboard_path, notice: "Logged in!"
+  end
   
 end
