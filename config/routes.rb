@@ -63,6 +63,7 @@ Myapp::Application.routes.draw do
   get 'manager/business_reviews', to: 'manager#business_reviews'
   get 'manager/edit_review', to: 'manager#edit_review'
   put 'manager/update_review', to: 'manager#update_review', as: 'manager/update_review'
+  get 'manager/sign_in_as_business', to: 'manager#sign_in_as_business'
   
   get 'contacts/create_a_business_listing', to: 'contacts#create_a_business_listing'
   get 'contacts/totally_delete_contact', to: 'contacts#totally_delete_contact'
